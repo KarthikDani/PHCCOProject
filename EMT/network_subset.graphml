@@ -1,0 +1,1621 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="node" attr.name="type" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="2799.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="r0130">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="9057.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="9194.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T14g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="AG13T1g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="r0739">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NTD3">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="8802.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="4967.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1376.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ALDD2x">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="219.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="5286.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="2180.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="Htm">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="2588.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NDPK6">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="51251.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="51.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ASNt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6519.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="3099.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8704.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="2683.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ALCD21_D">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="641371.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="GLYt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ALCD1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6578.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="3295.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NCKt">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="10201.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="S23T3g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PI4P5K">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NTD8">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PI45P5P">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="4833.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="9435.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="54407.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="3177.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="HEX4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="1375.4">
+      <data key="d0">gene</data>
+    </node>
+    <node id="127.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ESTRONESt">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="3101.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8704.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ACOAD1fm">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="35.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NT5C">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="10905.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="r1487">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="387775.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="r0308">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="55825.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="26289.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="56301.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="84889.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1375.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="19.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NTD11">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="RE2973C">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PI45PLC">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NTD7">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ATPasel">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="RE3074X">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="57134.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PI4P3K">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="29922.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="GLCt1r">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ICDHxm">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="CYOOm3">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="5211.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8836.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NDPK3">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="C161CPT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="AG13T2g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="9334.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="10599.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1738.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="GLDBRAN">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="5MTHFt">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="VACCCPT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="11254.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ADNCYC">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="30.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PHEt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ALCD21_L">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="H2Ot">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="51.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="C180CPT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="r1252">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="2181.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T3g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6566.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NTD10">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="51703.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="3073.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="MI1345PP">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="10449.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8854.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="131.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1375.3">
+      <data key="d0">gene</data>
+    </node>
+    <node id="LPSe">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="570.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="THRt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="60481.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T9g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NDPK5">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="3033.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T5g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="34.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="3417.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="FACOAL204">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="5287.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="OCT11EFATP">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="r1418">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="55089.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="RDH1a">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NTD5">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="r0345">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="RE2974C">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="130.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="LEUt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="215.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="6584.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="594.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="146712.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="28231.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ACP1_FMN_">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="SERt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="128.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="81539.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="r1255">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="5831.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="r0129">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="10678.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="GUACYC">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PI4PLC">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NTD4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="206358.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="84618.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="81616.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1593.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="11001.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="2182.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="r1260">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="3418.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="50484.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NOS2">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PPCOAOm">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="C161CPT12">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ARACHCPT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NADH2_u10m">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="10164.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="10331.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="54898.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8574.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="126129.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T8g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="5476.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="r0311">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="37.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="11041.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PDE4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PI3P4K">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="GLNt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6509.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ELAIDCPT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="29922.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1719.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="124935.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="4860.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="GALNTg">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6579.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NaKt">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="r0047">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="HEX7">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NDPK9">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="10998.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="501.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="2194.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="9056.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PI45P3K">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6818.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="6582.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1962.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8854.3">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T12g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="r0641">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="1892.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ACCOAC">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="r1257">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="93034.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="GCALDD">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="57393.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="3098.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="275.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="2731.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1375.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="MI145PP">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="2030.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="DAGK_hs">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="3030.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PROt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ALDD2y">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="4121.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="593.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T4g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="93010.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8501.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ATPS4m">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="AG13T7g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="8703.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T6g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NDPK2">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PI5P3K">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="AG13T13g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="2720.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="51102.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="124.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="6241.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NDPK7">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="CYOR_u10m">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="220.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="374907.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="1374.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NDPK4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="1718.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="23396.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NOS1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PDE1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="217.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8394.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="4166.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="79071.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8395.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8310.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="2653.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="TTDCPT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="4830.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="224.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T16g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="HEX1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NTD6">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="4832.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="RDH2a">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="SO4HCOtex">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="218.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="H2CO3D">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="54677.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8140.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="340024.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="6520.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="60386.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="FACOAL160i">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="23563.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="BAMPPALDOX">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="23563.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="51727.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="C181CPT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="4907.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PI345P5P">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6576.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="221.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="8854.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PDHm">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="231.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="3074.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="6240.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T18g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="788.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="LNELDCCPT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NDPK10">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PLA2_2">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ESTSULT">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6582.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="10005.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="222.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="FACOAL1831">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="GLCt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ATPH1e">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="ALCD22_L">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6533.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ALAt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6542.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PLA2_2e">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="LCADi">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="METt4">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="AG13T15g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="LDH_L">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="30833.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="CAt7r">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="79369.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="10678.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="23305.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="NDPK8">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="5288.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="223.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AGPAT1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="3032.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="4830.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="PIK3">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="10327.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="FBP26">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="AG13T10g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="GTHP">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="1629.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="6510.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="AG13T17g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="10991.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="126.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="4758.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="LCADi_D">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="NDPK1">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="1468.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="374907.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="4831.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="93034.2">
+      <data key="d0">gene</data>
+    </node>
+    <node id="22978.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ALCD22_D">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="PIPLC">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="2356.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="59272.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="ADK1m">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="AG13T11g">
+      <data key="d0">reaction</data>
+    </node>
+    <node id="6541.1">
+      <data key="d0">gene</data>
+    </node>
+    <node id="125.1">
+      <data key="d0">gene</data>
+    </node>
+    <edge source="219.1" target="ALDD2x" />
+    <edge source="219.1" target="ALDD2y" />
+    <edge source="5286.1" target="PI4P3K" />
+    <edge source="5286.1" target="PI5P3K" />
+    <edge source="5286.1" target="PIK3" />
+    <edge source="5286.1" target="RE2973C" />
+    <edge source="2180.1" target="FACOAL160i" />
+    <edge source="2180.1" target="FACOAL1831" />
+    <edge source="2180.1" target="FACOAL204" />
+    <edge source="2180.1" target="r0311" />
+    <edge source="2180.1" target="r1252" />
+    <edge source="2180.1" target="r1255" />
+    <edge source="2180.1" target="r1257" />
+    <edge source="2180.1" target="r1260" />
+    <edge source="2180.1" target="r1487" />
+    <edge source="2180.1" target="RE3074X" />
+    <edge source="51251.1" target="NT5C" />
+    <edge source="51251.1" target="NTD10" />
+    <edge source="51251.1" target="NTD11" />
+    <edge source="51251.1" target="NTD3" />
+    <edge source="51251.1" target="NTD4" />
+    <edge source="51251.1" target="NTD5" />
+    <edge source="51251.1" target="NTD6" />
+    <edge source="51251.1" target="NTD7" />
+    <edge source="51251.1" target="NTD8" />
+    <edge source="51251.1" target="r0047" />
+    <edge source="3099.1" target="HEX1" />
+    <edge source="3099.1" target="HEX4" />
+    <edge source="3099.1" target="HEX7" />
+    <edge source="641371.1" target="r0308" />
+    <edge source="10201.1" target="NDPK1" />
+    <edge source="10201.1" target="NDPK10" />
+    <edge source="10201.1" target="NDPK2" />
+    <edge source="10201.1" target="NDPK3" />
+    <edge source="10201.1" target="NDPK4" />
+    <edge source="10201.1" target="NDPK5" />
+    <edge source="10201.1" target="NDPK6" />
+    <edge source="10201.1" target="NDPK7" />
+    <edge source="10201.1" target="NDPK8" />
+    <edge source="10201.1" target="NDPK9" />
+    <edge source="54407.1" target="ALAt4" />
+    <edge source="54407.1" target="ASNt4" />
+    <edge source="54407.1" target="GLNt4" />
+    <edge source="54407.1" target="GLYt4" />
+    <edge source="54407.1" target="METt4" />
+    <edge source="54407.1" target="PHEt4" />
+    <edge source="54407.1" target="PROt4" />
+    <edge source="54407.1" target="SERt4" />
+    <edge source="54407.1" target="THRt4" />
+    <edge source="1375.4" target="ARACHCPT1" />
+    <edge source="1375.4" target="C161CPT1" />
+    <edge source="1375.4" target="C161CPT12" />
+    <edge source="1375.4" target="C180CPT1" />
+    <edge source="1375.4" target="C181CPT1" />
+    <edge source="1375.4" target="ELAIDCPT1" />
+    <edge source="1375.4" target="LNELDCCPT1" />
+    <edge source="1375.4" target="TTDCPT1" />
+    <edge source="1375.4" target="VACCCPT1" />
+    <edge source="127.1" target="ALCD1" />
+    <edge source="127.1" target="ALCD21_D" />
+    <edge source="127.1" target="ALCD21_L" />
+    <edge source="127.1" target="ALCD22_D" />
+    <edge source="127.1" target="ALCD22_L" />
+    <edge source="127.1" target="r0739" />
+    <edge source="3101.1" target="HEX1" />
+    <edge source="3101.1" target="HEX4" />
+    <edge source="3101.1" target="HEX7" />
+    <edge source="35.1" target="ACOAD1fm" />
+    <edge source="35.1" target="PPCOAOm" />
+    <edge source="26289.1" target="r0345" />
+    <edge source="84889.1" target="ALAt4" />
+    <edge source="84889.1" target="LEUt4" />
+    <edge source="84889.1" target="PHEt4" />
+    <edge source="1375.2" target="ARACHCPT1" />
+    <edge source="1375.2" target="C161CPT1" />
+    <edge source="1375.2" target="C161CPT12" />
+    <edge source="1375.2" target="C180CPT1" />
+    <edge source="1375.2" target="C181CPT1" />
+    <edge source="1375.2" target="ELAIDCPT1" />
+    <edge source="1375.2" target="LNELDCCPT1" />
+    <edge source="1375.2" target="TTDCPT1" />
+    <edge source="1375.2" target="VACCCPT1" />
+    <edge source="29922.1" target="NDPK1" />
+    <edge source="29922.1" target="NDPK10" />
+    <edge source="29922.1" target="NDPK2" />
+    <edge source="29922.1" target="NDPK3" />
+    <edge source="29922.1" target="NDPK4" />
+    <edge source="29922.1" target="NDPK5" />
+    <edge source="29922.1" target="NDPK6" />
+    <edge source="29922.1" target="NDPK7" />
+    <edge source="29922.1" target="NDPK8" />
+    <edge source="29922.1" target="NDPK9" />
+    <edge source="10599.1" target="ESTRONESt" />
+    <edge source="1738.1" target="PDHm" />
+    <edge source="11254.1" target="ALAt4" />
+    <edge source="11254.1" target="ASNt4" />
+    <edge source="11254.1" target="GLNt4" />
+    <edge source="11254.1" target="GLYt4" />
+    <edge source="11254.1" target="LEUt4" />
+    <edge source="11254.1" target="METt4" />
+    <edge source="11254.1" target="PHEt4" />
+    <edge source="11254.1" target="SERt4" />
+    <edge source="11254.1" target="THRt4" />
+    <edge source="2181.1" target="FACOAL160i" />
+    <edge source="2181.1" target="FACOAL1831" />
+    <edge source="2181.1" target="FACOAL204" />
+    <edge source="2181.1" target="r0311" />
+    <edge source="2181.1" target="r1252" />
+    <edge source="2181.1" target="r1255" />
+    <edge source="2181.1" target="r1257" />
+    <edge source="2181.1" target="r1260" />
+    <edge source="2181.1" target="r1487" />
+    <edge source="2181.1" target="RE3074X" />
+    <edge source="51703.1" target="FACOAL160i" />
+    <edge source="51703.1" target="FACOAL1831" />
+    <edge source="51703.1" target="r0311" />
+    <edge source="51703.1" target="r1252" />
+    <edge source="51703.1" target="r1255" />
+    <edge source="51703.1" target="r1257" />
+    <edge source="51703.1" target="r1260" />
+    <edge source="51703.1" target="r1487" />
+    <edge source="51703.1" target="RE3074X" />
+    <edge source="8854.2" target="ALDD2x" />
+    <edge source="8854.2" target="ALDD2y" />
+    <edge source="8854.2" target="BAMPPALDOX" />
+    <edge source="8854.2" target="GCALDD" />
+    <edge source="8854.2" target="LCADi" />
+    <edge source="8854.2" target="LCADi_D" />
+    <edge source="131.1" target="ALCD1" />
+    <edge source="131.1" target="ALCD21_D" />
+    <edge source="131.1" target="ALCD21_L" />
+    <edge source="131.1" target="ALCD22_D" />
+    <edge source="131.1" target="ALCD22_L" />
+    <edge source="131.1" target="r0739" />
+    <edge source="1375.3" target="ARACHCPT1" />
+    <edge source="1375.3" target="C161CPT1" />
+    <edge source="1375.3" target="C161CPT12" />
+    <edge source="1375.3" target="C180CPT1" />
+    <edge source="1375.3" target="C181CPT1" />
+    <edge source="1375.3" target="ELAIDCPT1" />
+    <edge source="1375.3" target="LNELDCCPT1" />
+    <edge source="1375.3" target="TTDCPT1" />
+    <edge source="1375.3" target="VACCCPT1" />
+    <edge source="34.1" target="ACOAD1fm" />
+    <edge source="34.1" target="PPCOAOm" />
+    <edge source="5287.1" target="PI4P3K" />
+    <edge source="5287.1" target="PI5P3K" />
+    <edge source="5287.1" target="PIK3" />
+    <edge source="5287.1" target="RE2973C" />
+    <edge source="55089.1" target="ALAt4" />
+    <edge source="55089.1" target="ASNt4" />
+    <edge source="55089.1" target="GLNt4" />
+    <edge source="55089.1" target="GLYt4" />
+    <edge source="55089.1" target="LEUt4" />
+    <edge source="55089.1" target="PHEt4" />
+    <edge source="55089.1" target="PROt4" />
+    <edge source="55089.1" target="SERt4" />
+    <edge source="130.1" target="ALCD1" />
+    <edge source="130.1" target="ALCD21_D" />
+    <edge source="130.1" target="ALCD21_L" />
+    <edge source="130.1" target="ALCD22_D" />
+    <edge source="130.1" target="ALCD22_L" />
+    <edge source="130.1" target="r0739" />
+    <edge source="6584.1" target="METt4" />
+    <edge source="146712.1" target="AG13T10g" />
+    <edge source="146712.1" target="AG13T11g" />
+    <edge source="146712.1" target="AG13T12g" />
+    <edge source="146712.1" target="AG13T13g" />
+    <edge source="146712.1" target="AG13T14g" />
+    <edge source="146712.1" target="AG13T15g" />
+    <edge source="146712.1" target="AG13T16g" />
+    <edge source="146712.1" target="AG13T17g" />
+    <edge source="146712.1" target="AG13T18g" />
+    <edge source="146712.1" target="AG13T1g" />
+    <edge source="146712.1" target="AG13T2g" />
+    <edge source="146712.1" target="AG13T3g" />
+    <edge source="146712.1" target="AG13T4g" />
+    <edge source="146712.1" target="AG13T5g" />
+    <edge source="146712.1" target="AG13T6g" />
+    <edge source="146712.1" target="AG13T7g" />
+    <edge source="146712.1" target="AG13T8g" />
+    <edge source="146712.1" target="AG13T9g" />
+    <edge source="28231.1" target="ESTRONESt" />
+    <edge source="128.1" target="ALCD1" />
+    <edge source="128.1" target="ALCD21_D" />
+    <edge source="128.1" target="ALCD21_L" />
+    <edge source="128.1" target="ALCD22_D" />
+    <edge source="128.1" target="ALCD22_L" />
+    <edge source="128.1" target="r0739" />
+    <edge source="81539.1" target="ALAt4" />
+    <edge source="81539.1" target="ASNt4" />
+    <edge source="81539.1" target="GLNt4" />
+    <edge source="81539.1" target="GLYt4" />
+    <edge source="81539.1" target="LEUt4" />
+    <edge source="81539.1" target="METt4" />
+    <edge source="81539.1" target="PHEt4" />
+    <edge source="81539.1" target="PROt4" />
+    <edge source="81539.1" target="SERt4" />
+    <edge source="81539.1" target="THRt4" />
+    <edge source="10678.2" target="AG13T10g" />
+    <edge source="10678.2" target="AG13T11g" />
+    <edge source="10678.2" target="AG13T12g" />
+    <edge source="10678.2" target="AG13T13g" />
+    <edge source="10678.2" target="AG13T14g" />
+    <edge source="10678.2" target="AG13T15g" />
+    <edge source="10678.2" target="AG13T16g" />
+    <edge source="10678.2" target="AG13T17g" />
+    <edge source="10678.2" target="AG13T18g" />
+    <edge source="10678.2" target="AG13T1g" />
+    <edge source="10678.2" target="AG13T2g" />
+    <edge source="10678.2" target="AG13T3g" />
+    <edge source="10678.2" target="AG13T4g" />
+    <edge source="10678.2" target="AG13T5g" />
+    <edge source="10678.2" target="AG13T6g" />
+    <edge source="10678.2" target="AG13T7g" />
+    <edge source="10678.2" target="AG13T8g" />
+    <edge source="10678.2" target="AG13T9g" />
+    <edge source="84618.1" target="NT5C" />
+    <edge source="84618.1" target="NTD10" />
+    <edge source="84618.1" target="NTD11" />
+    <edge source="84618.1" target="NTD3" />
+    <edge source="84618.1" target="NTD4" />
+    <edge source="84618.1" target="NTD5" />
+    <edge source="84618.1" target="NTD6" />
+    <edge source="84618.1" target="NTD7" />
+    <edge source="84618.1" target="NTD8" />
+    <edge source="84618.1" target="r0047" />
+    <edge source="81616.1" target="FACOAL160i" />
+    <edge source="81616.1" target="FACOAL1831" />
+    <edge source="81616.1" target="FACOAL204" />
+    <edge source="81616.1" target="r0311" />
+    <edge source="81616.1" target="r1252" />
+    <edge source="81616.1" target="r1255" />
+    <edge source="81616.1" target="r1257" />
+    <edge source="81616.1" target="r1260" />
+    <edge source="81616.1" target="r1487" />
+    <edge source="11001.1" target="r0311" />
+    <edge source="11001.1" target="r1252" />
+    <edge source="11001.1" target="r1255" />
+    <edge source="11001.1" target="r1257" />
+    <edge source="11001.1" target="r1260" />
+    <edge source="11001.1" target="r1487" />
+    <edge source="11001.1" target="RE3074X" />
+    <edge source="11001.1" target="OCT11EFATP" />
+    <edge source="2182.1" target="FACOAL160i" />
+    <edge source="2182.1" target="FACOAL1831" />
+    <edge source="2182.1" target="FACOAL204" />
+    <edge source="2182.1" target="r0311" />
+    <edge source="2182.1" target="r1252" />
+    <edge source="2182.1" target="r1255" />
+    <edge source="2182.1" target="r1257" />
+    <edge source="2182.1" target="r1260" />
+    <edge source="2182.1" target="r1487" />
+    <edge source="2182.1" target="RE3074X" />
+    <edge source="10331.1" target="AG13T10g" />
+    <edge source="10331.1" target="AG13T11g" />
+    <edge source="10331.1" target="AG13T12g" />
+    <edge source="10331.1" target="AG13T13g" />
+    <edge source="10331.1" target="AG13T14g" />
+    <edge source="10331.1" target="AG13T15g" />
+    <edge source="10331.1" target="AG13T16g" />
+    <edge source="10331.1" target="AG13T17g" />
+    <edge source="10331.1" target="AG13T18g" />
+    <edge source="10331.1" target="AG13T1g" />
+    <edge source="10331.1" target="AG13T2g" />
+    <edge source="10331.1" target="AG13T3g" />
+    <edge source="10331.1" target="AG13T4g" />
+    <edge source="10331.1" target="AG13T5g" />
+    <edge source="10331.1" target="AG13T6g" />
+    <edge source="10331.1" target="AG13T7g" />
+    <edge source="10331.1" target="AG13T8g" />
+    <edge source="10331.1" target="AG13T9g" />
+    <edge source="126129.1" target="ARACHCPT1" />
+    <edge source="126129.1" target="C161CPT1" />
+    <edge source="126129.1" target="C161CPT12" />
+    <edge source="126129.1" target="C180CPT1" />
+    <edge source="126129.1" target="C181CPT1" />
+    <edge source="126129.1" target="ELAIDCPT1" />
+    <edge source="126129.1" target="LNELDCCPT1" />
+    <edge source="126129.1" target="TTDCPT1" />
+    <edge source="126129.1" target="VACCCPT1" />
+    <edge source="11041.1" target="AG13T10g" />
+    <edge source="11041.1" target="AG13T11g" />
+    <edge source="11041.1" target="AG13T12g" />
+    <edge source="11041.1" target="AG13T13g" />
+    <edge source="11041.1" target="AG13T14g" />
+    <edge source="11041.1" target="AG13T15g" />
+    <edge source="11041.1" target="AG13T16g" />
+    <edge source="11041.1" target="AG13T17g" />
+    <edge source="11041.1" target="AG13T18g" />
+    <edge source="11041.1" target="AG13T1g" />
+    <edge source="11041.1" target="AG13T2g" />
+    <edge source="11041.1" target="AG13T3g" />
+    <edge source="11041.1" target="AG13T4g" />
+    <edge source="11041.1" target="AG13T5g" />
+    <edge source="11041.1" target="AG13T6g" />
+    <edge source="11041.1" target="AG13T7g" />
+    <edge source="11041.1" target="AG13T8g" />
+    <edge source="11041.1" target="AG13T9g" />
+    <edge source="29922.2" target="NDPK1" />
+    <edge source="29922.2" target="NDPK10" />
+    <edge source="29922.2" target="NDPK2" />
+    <edge source="29922.2" target="NDPK3" />
+    <edge source="29922.2" target="NDPK4" />
+    <edge source="29922.2" target="NDPK5" />
+    <edge source="29922.2" target="NDPK6" />
+    <edge source="29922.2" target="NDPK7" />
+    <edge source="29922.2" target="NDPK8" />
+    <edge source="29922.2" target="NDPK9" />
+    <edge source="6579.1" target="ESTRONESt" />
+    <edge source="10998.1" target="OCT11EFATP" />
+    <edge source="501.1" target="ALDD2x" />
+    <edge source="501.1" target="BAMPPALDOX" />
+    <edge source="501.1" target="GCALDD" />
+    <edge source="501.1" target="LCADi" />
+    <edge source="501.1" target="LCADi_D" />
+    <edge source="6818.1" target="ESTSULT" />
+    <edge source="8854.3" target="ALDD2x" />
+    <edge source="8854.3" target="ALDD2y" />
+    <edge source="8854.3" target="BAMPPALDOX" />
+    <edge source="8854.3" target="GCALDD" />
+    <edge source="8854.3" target="LCADi" />
+    <edge source="8854.3" target="LCADi_D" />
+    <edge source="93034.1" target="NT5C" />
+    <edge source="93034.1" target="NTD10" />
+    <edge source="93034.1" target="NTD11" />
+    <edge source="93034.1" target="NTD3" />
+    <edge source="93034.1" target="NTD4" />
+    <edge source="93034.1" target="NTD5" />
+    <edge source="93034.1" target="NTD6" />
+    <edge source="93034.1" target="NTD7" />
+    <edge source="93034.1" target="NTD8" />
+    <edge source="93034.1" target="r0047" />
+    <edge source="57393.1" target="ALAt4" />
+    <edge source="57393.1" target="ASNt4" />
+    <edge source="57393.1" target="GLNt4" />
+    <edge source="57393.1" target="GLYt4" />
+    <edge source="57393.1" target="LEUt4" />
+    <edge source="57393.1" target="METt4" />
+    <edge source="57393.1" target="PHEt4" />
+    <edge source="57393.1" target="PROt4" />
+    <edge source="57393.1" target="SERt4" />
+    <edge source="57393.1" target="THRt4" />
+    <edge source="3098.1" target="HEX1" />
+    <edge source="3098.1" target="HEX4" />
+    <edge source="3098.1" target="HEX7" />
+    <edge source="1375.1" target="ARACHCPT1" />
+    <edge source="1375.1" target="C161CPT1" />
+    <edge source="1375.1" target="C161CPT12" />
+    <edge source="1375.1" target="C180CPT1" />
+    <edge source="1375.1" target="C181CPT1" />
+    <edge source="1375.1" target="ELAIDCPT1" />
+    <edge source="1375.1" target="LNELDCCPT1" />
+    <edge source="1375.1" target="TTDCPT1" />
+    <edge source="1375.1" target="VACCCPT1" />
+    <edge source="93010.1" target="AG13T10g" />
+    <edge source="93010.1" target="AG13T11g" />
+    <edge source="93010.1" target="AG13T12g" />
+    <edge source="93010.1" target="AG13T13g" />
+    <edge source="93010.1" target="AG13T14g" />
+    <edge source="93010.1" target="AG13T15g" />
+    <edge source="93010.1" target="AG13T16g" />
+    <edge source="93010.1" target="AG13T17g" />
+    <edge source="93010.1" target="AG13T18g" />
+    <edge source="93010.1" target="AG13T1g" />
+    <edge source="93010.1" target="AG13T2g" />
+    <edge source="93010.1" target="AG13T3g" />
+    <edge source="93010.1" target="AG13T4g" />
+    <edge source="93010.1" target="AG13T5g" />
+    <edge source="93010.1" target="AG13T6g" />
+    <edge source="93010.1" target="AG13T7g" />
+    <edge source="93010.1" target="AG13T8g" />
+    <edge source="93010.1" target="AG13T9g" />
+    <edge source="124.1" target="ALCD1" />
+    <edge source="124.1" target="ALCD21_D" />
+    <edge source="124.1" target="ALCD21_L" />
+    <edge source="124.1" target="ALCD22_D" />
+    <edge source="124.1" target="ALCD22_L" />
+    <edge source="124.1" target="r0739" />
+    <edge source="220.1" target="ALDD2x" />
+    <edge source="220.1" target="GCALDD" />
+    <edge source="220.1" target="LCADi" />
+    <edge source="220.1" target="LCADi_D" />
+    <edge source="374907.1" target="AG13T10g" />
+    <edge source="374907.1" target="AG13T11g" />
+    <edge source="374907.1" target="AG13T12g" />
+    <edge source="374907.1" target="AG13T13g" />
+    <edge source="374907.1" target="AG13T14g" />
+    <edge source="374907.1" target="AG13T15g" />
+    <edge source="374907.1" target="AG13T16g" />
+    <edge source="374907.1" target="AG13T17g" />
+    <edge source="374907.1" target="AG13T18g" />
+    <edge source="374907.1" target="AG13T1g" />
+    <edge source="374907.1" target="AG13T2g" />
+    <edge source="374907.1" target="AG13T3g" />
+    <edge source="374907.1" target="AG13T4g" />
+    <edge source="374907.1" target="AG13T5g" />
+    <edge source="374907.1" target="AG13T6g" />
+    <edge source="374907.1" target="AG13T7g" />
+    <edge source="374907.1" target="AG13T8g" />
+    <edge source="374907.1" target="AG13T9g" />
+    <edge source="1374.1" target="ARACHCPT1" />
+    <edge source="1374.1" target="C161CPT1" />
+    <edge source="1374.1" target="C161CPT12" />
+    <edge source="1374.1" target="C180CPT1" />
+    <edge source="1374.1" target="C181CPT1" />
+    <edge source="1374.1" target="ELAIDCPT1" />
+    <edge source="1374.1" target="LNELDCCPT1" />
+    <edge source="1374.1" target="TTDCPT1" />
+    <edge source="1374.1" target="VACCCPT1" />
+    <edge source="23396.1" target="PI3P4K" />
+    <edge source="23396.1" target="PI4P5K" />
+    <edge source="23396.1" target="RE2974C" />
+    <edge source="8394.1" target="PI3P4K" />
+    <edge source="8394.1" target="PI4P5K" />
+    <edge source="8394.1" target="RE2974C" />
+    <edge source="8395.1" target="PI3P4K" />
+    <edge source="8395.1" target="PI4P5K" />
+    <edge source="8395.1" target="RE2974C" />
+    <edge source="4830.1" target="NDPK1" />
+    <edge source="4830.1" target="NDPK10" />
+    <edge source="4830.1" target="NDPK2" />
+    <edge source="4830.1" target="NDPK3" />
+    <edge source="4830.1" target="NDPK4" />
+    <edge source="4830.1" target="NDPK5" />
+    <edge source="4830.1" target="NDPK6" />
+    <edge source="4830.1" target="NDPK7" />
+    <edge source="4830.1" target="NDPK8" />
+    <edge source="4830.1" target="NDPK9" />
+    <edge source="224.1" target="ALDD2x" />
+    <edge source="224.1" target="ALDD2y" />
+    <edge source="224.1" target="BAMPPALDOX" />
+    <edge source="224.1" target="GCALDD" />
+    <edge source="224.1" target="LCADi" />
+    <edge source="224.1" target="LCADi_D" />
+    <edge source="4832.1" target="NDPK1" />
+    <edge source="4832.1" target="NDPK10" />
+    <edge source="4832.1" target="NDPK2" />
+    <edge source="4832.1" target="NDPK3" />
+    <edge source="4832.1" target="NDPK4" />
+    <edge source="4832.1" target="NDPK5" />
+    <edge source="4832.1" target="NDPK6" />
+    <edge source="4832.1" target="NDPK7" />
+    <edge source="4832.1" target="NDPK8" />
+    <edge source="4832.1" target="NDPK9" />
+    <edge source="218.1" target="ALDD2x" />
+    <edge source="218.1" target="ALDD2y" />
+    <edge source="218.1" target="GCALDD" />
+    <edge source="218.1" target="LCADi" />
+    <edge source="218.1" target="LCADi_D" />
+    <edge source="340024.1" target="ALAt4" />
+    <edge source="340024.1" target="ASNt4" />
+    <edge source="340024.1" target="GLNt4" />
+    <edge source="340024.1" target="GLYt4" />
+    <edge source="340024.1" target="LEUt4" />
+    <edge source="340024.1" target="METt4" />
+    <edge source="340024.1" target="PHEt4" />
+    <edge source="340024.1" target="PROt4" />
+    <edge source="340024.1" target="SERt4" />
+    <edge source="340024.1" target="THRt4" />
+    <edge source="6520.1" target="LEUt4" />
+    <edge source="4907.1" target="NT5C" />
+    <edge source="4907.1" target="NTD10" />
+    <edge source="4907.1" target="NTD11" />
+    <edge source="4907.1" target="NTD3" />
+    <edge source="4907.1" target="NTD4" />
+    <edge source="4907.1" target="NTD5" />
+    <edge source="4907.1" target="NTD6" />
+    <edge source="4907.1" target="NTD8" />
+    <edge source="4907.1" target="r0047" />
+    <edge source="221.1" target="ALDD2x" />
+    <edge source="221.1" target="ALDD2y" />
+    <edge source="221.1" target="GCALDD" />
+    <edge source="221.1" target="LCADi" />
+    <edge source="221.1" target="LCADi_D" />
+    <edge source="8854.1" target="ALDD2x" />
+    <edge source="8854.1" target="ALDD2y" />
+    <edge source="8854.1" target="BAMPPALDOX" />
+    <edge source="8854.1" target="GCALDD" />
+    <edge source="8854.1" target="LCADi" />
+    <edge source="8854.1" target="LCADi_D" />
+    <edge source="222.1" target="ALDD2x" />
+    <edge source="222.1" target="ALDD2y" />
+    <edge source="222.1" target="GCALDD" />
+    <edge source="222.1" target="LCADi" />
+    <edge source="222.1" target="LCADi_D" />
+    <edge source="6542.1" target="ALAt4" />
+    <edge source="6542.1" target="LEUt4" />
+    <edge source="6542.1" target="PHEt4" />
+    <edge source="30833.1" target="NT5C" />
+    <edge source="30833.1" target="NTD10" />
+    <edge source="30833.1" target="NTD3" />
+    <edge source="30833.1" target="NTD4" />
+    <edge source="30833.1" target="NTD5" />
+    <edge source="30833.1" target="NTD6" />
+    <edge source="30833.1" target="NTD7" />
+    <edge source="30833.1" target="NTD8" />
+    <edge source="30833.1" target="r0047" />
+    <edge source="79369.1" target="AG13T10g" />
+    <edge source="79369.1" target="AG13T11g" />
+    <edge source="79369.1" target="AG13T12g" />
+    <edge source="79369.1" target="AG13T13g" />
+    <edge source="79369.1" target="AG13T14g" />
+    <edge source="79369.1" target="AG13T15g" />
+    <edge source="79369.1" target="AG13T16g" />
+    <edge source="79369.1" target="AG13T17g" />
+    <edge source="79369.1" target="AG13T18g" />
+    <edge source="79369.1" target="AG13T1g" />
+    <edge source="79369.1" target="AG13T2g" />
+    <edge source="79369.1" target="AG13T3g" />
+    <edge source="79369.1" target="AG13T4g" />
+    <edge source="79369.1" target="AG13T5g" />
+    <edge source="79369.1" target="AG13T6g" />
+    <edge source="79369.1" target="AG13T7g" />
+    <edge source="79369.1" target="AG13T8g" />
+    <edge source="79369.1" target="AG13T9g" />
+    <edge source="10678.1" target="AG13T10g" />
+    <edge source="10678.1" target="AG13T11g" />
+    <edge source="10678.1" target="AG13T12g" />
+    <edge source="10678.1" target="AG13T13g" />
+    <edge source="10678.1" target="AG13T14g" />
+    <edge source="10678.1" target="AG13T15g" />
+    <edge source="10678.1" target="AG13T16g" />
+    <edge source="10678.1" target="AG13T17g" />
+    <edge source="10678.1" target="AG13T18g" />
+    <edge source="10678.1" target="AG13T1g" />
+    <edge source="10678.1" target="AG13T2g" />
+    <edge source="10678.1" target="AG13T3g" />
+    <edge source="10678.1" target="AG13T4g" />
+    <edge source="10678.1" target="AG13T5g" />
+    <edge source="10678.1" target="AG13T6g" />
+    <edge source="10678.1" target="AG13T7g" />
+    <edge source="10678.1" target="AG13T8g" />
+    <edge source="10678.1" target="AG13T9g" />
+    <edge source="23305.1" target="FACOAL1831" />
+    <edge source="23305.1" target="r0311" />
+    <edge source="23305.1" target="r1252" />
+    <edge source="23305.1" target="r1255" />
+    <edge source="23305.1" target="r1257" />
+    <edge source="23305.1" target="r1260" />
+    <edge source="23305.1" target="r1487" />
+    <edge source="23305.1" target="RE3074X" />
+    <edge source="5288.1" target="PI4P3K" />
+    <edge source="5288.1" target="PI5P3K" />
+    <edge source="5288.1" target="PIK3" />
+    <edge source="5288.1" target="RE2973C" />
+    <edge source="223.1" target="ALDD2x" />
+    <edge source="223.1" target="ALDD2y" />
+    <edge source="223.1" target="BAMPPALDOX" />
+    <edge source="223.1" target="GCALDD" />
+    <edge source="223.1" target="LCADi" />
+    <edge source="223.1" target="LCADi_D" />
+    <edge source="4830.2" target="NDPK1" />
+    <edge source="4830.2" target="NDPK10" />
+    <edge source="4830.2" target="NDPK2" />
+    <edge source="4830.2" target="NDPK3" />
+    <edge source="4830.2" target="NDPK4" />
+    <edge source="4830.2" target="NDPK5" />
+    <edge source="4830.2" target="NDPK6" />
+    <edge source="4830.2" target="NDPK7" />
+    <edge source="4830.2" target="NDPK8" />
+    <edge source="4830.2" target="NDPK9" />
+    <edge source="126.1" target="ALCD1" />
+    <edge source="126.1" target="ALCD21_D" />
+    <edge source="126.1" target="ALCD21_L" />
+    <edge source="126.1" target="ALCD22_D" />
+    <edge source="126.1" target="ALCD22_L" />
+    <edge source="126.1" target="r0739" />
+    <edge source="374907.2" target="AG13T10g" />
+    <edge source="374907.2" target="AG13T11g" />
+    <edge source="374907.2" target="AG13T12g" />
+    <edge source="374907.2" target="AG13T13g" />
+    <edge source="374907.2" target="AG13T14g" />
+    <edge source="374907.2" target="AG13T15g" />
+    <edge source="374907.2" target="AG13T16g" />
+    <edge source="374907.2" target="AG13T17g" />
+    <edge source="374907.2" target="AG13T18g" />
+    <edge source="374907.2" target="AG13T1g" />
+    <edge source="374907.2" target="AG13T2g" />
+    <edge source="374907.2" target="AG13T3g" />
+    <edge source="374907.2" target="AG13T4g" />
+    <edge source="374907.2" target="AG13T5g" />
+    <edge source="374907.2" target="AG13T6g" />
+    <edge source="374907.2" target="AG13T7g" />
+    <edge source="374907.2" target="AG13T8g" />
+    <edge source="374907.2" target="AG13T9g" />
+    <edge source="4831.1" target="NDPK1" />
+    <edge source="4831.1" target="NDPK10" />
+    <edge source="4831.1" target="NDPK2" />
+    <edge source="4831.1" target="NDPK3" />
+    <edge source="4831.1" target="NDPK4" />
+    <edge source="4831.1" target="NDPK5" />
+    <edge source="4831.1" target="NDPK6" />
+    <edge source="4831.1" target="NDPK7" />
+    <edge source="4831.1" target="NDPK8" />
+    <edge source="4831.1" target="NDPK9" />
+    <edge source="93034.2" target="NT5C" />
+    <edge source="93034.2" target="NTD10" />
+    <edge source="93034.2" target="NTD11" />
+    <edge source="93034.2" target="NTD3" />
+    <edge source="93034.2" target="NTD6" />
+    <edge source="93034.2" target="NTD7" />
+    <edge source="93034.2" target="NTD8" />
+    <edge source="22978.1" target="NT5C" />
+    <edge source="22978.1" target="NTD10" />
+    <edge source="22978.1" target="NTD11" />
+    <edge source="22978.1" target="NTD4" />
+    <edge source="22978.1" target="NTD5" />
+    <edge source="22978.1" target="NTD6" />
+    <edge source="22978.1" target="NTD7" />
+    <edge source="22978.1" target="NTD8" />
+    <edge source="22978.1" target="r0047" />
+    <edge source="59272.1" target="ALAt4" />
+    <edge source="59272.1" target="ASNt4" />
+    <edge source="59272.1" target="GLNt4" />
+    <edge source="59272.1" target="GLYt4" />
+    <edge source="59272.1" target="LEUt4" />
+    <edge source="59272.1" target="METt4" />
+    <edge source="59272.1" target="PHEt4" />
+    <edge source="59272.1" target="PROt4" />
+    <edge source="59272.1" target="SERt4" />
+    <edge source="59272.1" target="THRt4" />
+    <edge source="6541.1" target="ALAt4" />
+    <edge source="6541.1" target="LEUt4" />
+    <edge source="6541.1" target="PHEt4" />
+    <edge source="125.1" target="ALCD1" />
+    <edge source="125.1" target="ALCD21_D" />
+    <edge source="125.1" target="ALCD21_L" />
+    <edge source="125.1" target="ALCD22_D" />
+    <edge source="125.1" target="ALCD22_L" />
+    <edge source="125.1" target="r0739" />
+  </graph>
+</graphml>
