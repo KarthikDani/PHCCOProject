@@ -1,13 +1,11 @@
 import os
 import subprocess
 
-# Define the path to your .ipynb file
 notebook_path = "/Users/karthik/Desktop/PHCCO IISc Internship/EMT/integrate_expression.ipynb"
 base_filename = os.path.basename(notebook_path).split(".")[0]
 markdown_path = os.path.join(os.path.dirname(notebook_path), base_filename + ".md")
 pdf_output_path = os.path.join(os.path.dirname(notebook_path), base_filename + ".pdf")
 
-# Metadata for the PDF
 metadata_comp = {
     "title": "Comparative Metabolic Analysis of Fasting Effects on an EMT Model",
     "author": "Karthik",
@@ -39,7 +37,6 @@ metadata = {
     "institute": "BMS College of Engineering, Bangalore"
 }
 
-# Convert the notebook to Markdown
 try:
     subprocess.run(['jupyter', 'nbconvert', '--to', 'markdown', '--TagRemovePreprocessor.enabled=True', '--TagRemovePreprocessor.remove_cell_tags="exclude-output', notebook_path], check=True)
     print(f"Converted notebook to Markdown: {markdown_path}")
@@ -48,18 +45,14 @@ except subprocess.CalledProcessError as e:
     print(f"Error during Markdown conversion: {e}")
     exit(1)
 
-# Build the pandoc command with metadata
 pandoc_command = ["pandoc", markdown_path, "-o", pdf_output_path]
 
 for key, value in metadata.items():
     pandoc_command.append(f"--metadata={key}={value}")
 
-# Convert the Markdown file to PDF using pandoc
+
 try:
     subprocess.run(pandoc_command, check=True)
     print(f"Successfully converted Markdown to PDF: {pdf_output_path}")
 except subprocess.CalledProcessError as e:
     print(f"Error during PDF conversion: {e}")
-
-# Clean up intermediate files if needed
-# os.remove(markdown_path)
