@@ -3,7 +3,7 @@ from sklearn.preprocessing import MinMaxScaler
 from cobra.io import read_sbml_model, write_sbml_model
 from cobra.manipulation.delete import remove_genes, prune_unused_metabolites, prune_unused_reactions
 from corda import CORDA
-from typing import Union
+from typing import Union, Optional
 import cobra
 
 def read_parent_model(model_path: str) -> cobra.Model:
@@ -139,14 +139,27 @@ def main(model_path: str, data_path: str, gene_name_column: Union[str, None], ge
     
     return optimized_model.cobra_model(scores_column)
 
-if __name__ == "__main__":
-    # Example usage:
-    model_path = '/Users/karthik/Desktop/PHCCO IISc Internship/Models/Epithelial_csm.xml'
-    data_path = '/Users/karthik/Desktop/PHCCO IISc Internship/Data/InputData/EMT_FINAL_DATA.csv'
-    
-    gene_name_column = None
-    gene_id_column = "Gene_ID"
-    scores_column = "Epithelial"
-    
-    optimized_model = main(model_path, data_path, gene_name_column, gene_id_column, scores_column)
-    print(f"Reconstruction completed from the parent model {optimized_model}")
+def run_model_reconstruction(model_path: str, data_path: str,
+                             gene_name_column: Optional[str],
+                             gene_id_column: str,
+                             scores_column: str) -> Optional[str]:
+    """
+    Run model reconstruction using the specified paths and columns.
+
+    Parameters:
+    - model_path (str): Path to the XML model file.
+    - data_path (str): Path to the input data CSV file.
+    - gene_name_column (str or None): Column name for gene names (optional).
+    - gene_id_column (str): Column name for gene IDs.
+    - scores_column (str): Column name for scores.
+
+    Returns:
+    - str or None: Optimized model name if reconstruction is successful, else None.
+    """
+    try:
+        optimized_model = main(model_path, data_path, gene_name_column, gene_id_column, scores_column)
+        print(f"Reconstruction completed from the parent model {optimized_model}")
+        return optimized_model
+    except Exception as e:
+        print(f"Error during model reconstruction: {e}")
+        return None

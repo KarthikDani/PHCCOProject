@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 DESCRIPTION = "[Currently] Pipeline for building and analyzing context-specific metabolic models"
 
 with open("README.md", "r") as f:
@@ -28,7 +28,7 @@ setup(
         'scikit-learn',
     ],
     classifiers=[
-        "Development Status :: 3 - Alpha"
+        "Development Status :: 3 - Alpha",
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',

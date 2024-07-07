@@ -1,0 +1,9 @@
+LICENSE.txt
+README.md
+setup.py
+gsmm/__init__.py
+gsmm.egg-info/PKG-INFO
+gsmm.egg-info/SOURCES.txt
+gsmm.egg-info/dependency_links.txt
+gsmm.egg-info/requires.txt
+gsmm.egg-info/top_level.txt

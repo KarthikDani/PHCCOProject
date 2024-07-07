@@ -1,6 +1,6 @@
 # flux_analysis.py
 
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Set, Optional
 from cobra.io import read_sbml_model
 from cobra.core import Model
 import pandas as pd
@@ -9,6 +9,7 @@ from cobra.exceptions import OptimizationError, Infeasible
 from cobra.flux_analysis import single_reaction_deletion
 import logging
 import os
+from config import *
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -120,31 +121,91 @@ def save_data_for_visualization(df_fluxes: pd.DataFrame, df_sink_fluxes: pd.Data
     except Exception as e:
         logging.error(f"Failed to save data: {e}")
         print(f"Error: Failed to save data: {e}")
+        
+        
+# Single reaction deletions
+# Function to perform single reaction deletion on a model
+def perform_single_reaction_deletion(model: Model) -> pd.DataFrame:
+    """Perform single reaction deletion on the given model."""
+    deletion_results = single_reaction_deletion(model)
+    return deletion_results
 
+# Function to save reaction deletion results for each model
+def save_reaction_deletion_results(models_dict: Dict[str, Model], output_dir: str) -> Dict[str, pd.DataFrame]:
+    """Perform single reaction deletion for each model in models_dict and save the results."""
+    results: Dict[str, pd.DataFrame] = {}
+    for model_name, model in models_dict.items():
+        logging.info(f"Performing single reaction deletion on {model_name}...")
+        deletion_results = perform_single_reaction_deletion(model)
+        results[model_name] = deletion_results
+        output_path = f"{output_dir}/{model_name}_reaction_deletion_results.pkl"
+        deletion_results.to_pickle(output_path)
+        logging.info(f"Saved single reaction deletion results for {model_name} to {output_path}")
+    return results
 
-def main():
-    # Define model paths
-    model_paths = {
-        "ModelE": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/Epithelial_csm.xml",
-        "ModelM": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/Mesenchymal_csm.xml",
-        "ModelMF": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/mesenchymal_fasting_integrated_csm.xml",
-    }
+# Function to find common reactions across all models
+def find_common_reactions(reaction_deletion_results: Dict[str, pd.DataFrame]) -> List[str]:
+    """Find common reactions across all models."""
+    reaction_sets: List[Set[str]] = [set(results.index) for results in reaction_deletion_results.values()]
+    common_reactions: Set[str] = set.intersection(*reaction_sets)
+    return list(common_reactions)
 
-    # List of metabolites of interest
-    metabolites_of_interest = [
-        "ala__L_c", "arg__L_c", "asn__L_c", "asp__L_c", "cys__L_c", "gln__L_c",
-        "glu__L_c", "gly_c", "his__L_c", "ile__L_c", "leu__L_c", "lys__L_c",
-        "met__L_c", "phe__L_c", "pro__L_c", "ser__L_c", "thr__L_c", "trp__L_c",
-        "tyr__L_c", "val__L_c", "damp_c", "dcmp_c", "dgmp_c", "dtmp_c",
-        "cmp_c", "gmp_c", "ump_c", "amp_c", "glygn2_c", "sphmyln_hs_c",
-        "chsterol_c", "xolest_hs_c", "mag__hs_c", "dag_hs_c", "pail_hs_c",
-        "pe_hs_c", "ps_hs_c", "pchol_hs_c", "lpchol_hs_c", "clpn_hs_c",
-        "pa_hs_c", "hdcea_c", "hdca_c", "ocdcea_c", "ocdca_c", "ptrc_c",
-        "spmd_c", "sprm_c", "gthrd_c", "nad_c", "nadp_c", "Q10_c",
-        "paps_c", "thbpt_c", "crn_c", "atp_c", "adp_c", "pi_c",
-        "h2o_c", "h_c",
-    ]
+# Function to filter deletion results to keep only common reactions
+def filter_deletion_results(deletion_results: Dict[str, pd.DataFrame], common_reactions: List[str]) -> Dict[str, pd.DataFrame]:
+    """Filter reaction deletion results to keep only common reactions."""
+    filtered_results: Dict[str, pd.DataFrame] = {}
+    for model_name, results in deletion_results.items():
+        filtered_results[model_name] = results.loc[results.index.isin(common_reactions)]
+    return filtered_results
 
+# Function to save filtered reaction deletion results
+def save_filtered_reaction_deletion_results(filtered_results: Dict[str, pd.DataFrame], output_dir: str) -> None:
+    """
+    Save filtered reaction deletion results to pickle files.
+
+    Parameters:
+    - filtered_results (Dict[str, pd.DataFrame]): Dictionary mapping model names to filtered deletion results DataFrames.
+    - output_dir (str): Directory path where to save the results.
+    """
+    try:
+        for model_name, df in filtered_results.items():
+            output_path = f"{output_dir}/{model_name}_filtered_reaction_deletion_results.pkl"
+            df.to_pickle(output_path)
+            print(f"Saved filtered reaction deletion results for {model_name} to {output_path}")
+    except Exception as e:
+        print(f"Error saving filtered reaction deletion results: {str(e)}")
+
+def run_single_reaction_deletion():
+
+    # Load models
+    models = load_models(model_paths)
+
+    # Perform and save reaction deletion results
+    reaction_deletion_results = save_reaction_deletion_results(models, output_dir)
+
+    # Find common reactions
+    common_reactions = find_common_reactions(reaction_deletion_results)
+
+    # Filter deletion results to keep only common reactions
+    filtered_reaction_deletion_results = filter_deletion_results(reaction_deletion_results, common_reactions)
+
+    # Save filtered reaction deletion results
+    save_filtered_reaction_deletion_results(filtered_reaction_deletion_results, output_dir__reaction_deletion_results)
+
+def analyse_and_save_fluxes(model_paths: Optional[Dict[str, str]] = None) -> None:
+    """
+    Analyze fluxes from given model paths and save the results.
+
+    Parameters:
+    - model_paths (dict, optional): Dictionary containing model names as keys and file paths as values.
+                                    Defaults to None.
+
+    Returns:
+    - None
+    """
+    if not isinstance(model_paths, dict):
+        raise TypeError("Expected model_paths to be a dictionary.")
+    
     # Load models
     models = load_models(model_paths)
 
@@ -157,7 +218,3 @@ def main():
 
     # Save data for visualization
     save_data_for_visualization(df_fluxes_filtered, df_sink_fluxes)
-
-
-if __name__ == "__main__":
-    main()
