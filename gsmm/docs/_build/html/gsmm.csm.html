@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gsmm.csm package &mdash; GSMM 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=92734c54"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="gsmm package" href="gsmm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GSMM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">gsmm</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gsmm.html">gsmm package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="gsmm.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">gsmm.csm package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gsmm.html#module-gsmm">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GSMM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">gsmm</a></li>
+          <li class="breadcrumb-item"><a href="gsmm.html">gsmm package</a></li>
+      <li class="breadcrumb-item active">gsmm.csm package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/gsmm.csm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gsmm-csm-package">
+<h1>gsmm.csm package<a class="headerlink" href="#gsmm-csm-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-gsmm.csm.analyse_csm">
+<span id="gsmm-csm-analyse-csm-module"></span><h2>gsmm.csm.analyse_csm module<a class="headerlink" href="#module-gsmm.csm.analyse_csm" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.analyse_and_save_fluxes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">analyse_and_save_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#analyse_and_save_fluxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.analyse_and_save_fluxes" title="Link to this definition"></a></dt>
+<dd><p>Analyze fluxes from given model paths and save the results.</p>
+<p>Parameters:
+- model_paths (dict, optional): Dictionary containing model names as keys and file paths as values. Defaults to None.</p>
+<p>Returns:
+- None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.collect_sink_fluxes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">collect_sink_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metabolites</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#collect_sink_fluxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.collect_sink_fluxes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.extract_fluxes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">extract_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#extract_fluxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.extract_fluxes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.filter_deletion_results">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">filter_deletion_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deletion_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_reactions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#filter_deletion_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.filter_deletion_results" title="Link to this definition"></a></dt>
+<dd><p>Filter reaction deletion results to keep only common reactions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.filter_non_zero_fluxes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">filter_non_zero_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#filter_non_zero_fluxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.filter_non_zero_fluxes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.find_common_reactions">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">find_common_reactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reaction_deletion_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#find_common_reactions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.find_common_reactions" title="Link to this definition"></a></dt>
+<dd><p>Find common reactions across all models.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.get_sink_fluxes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">get_sink_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metabolites</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#get_sink_fluxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.get_sink_fluxes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.load_models">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">load_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#load_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.load_models" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.optimize_and_get_fluxes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">optimize_and_get_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#optimize_and_get_fluxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.optimize_and_get_fluxes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.perform_single_reaction_deletion">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">perform_single_reaction_deletion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#perform_single_reaction_deletion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.perform_single_reaction_deletion" title="Link to this definition"></a></dt>
+<dd><p>Perform single reaction deletion on the given model.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.run_single_reaction_deletion">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">run_single_reaction_deletion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#run_single_reaction_deletion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.run_single_reaction_deletion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.save_data_for_visualization">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">save_data_for_visualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_fluxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_sink_fluxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'flux_data.pkl'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#save_data_for_visualization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.save_data_for_visualization" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.save_filtered_reaction_deletion_results">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">save_filtered_reaction_deletion_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filtered_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#save_filtered_reaction_deletion_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.save_filtered_reaction_deletion_results" title="Link to this definition"></a></dt>
+<dd><p>Save filtered reaction deletion results to pickle files.</p>
+<p>Parameters:
+- filtered_results (Dict[str, pd.DataFrame]): Dictionary mapping model names to filtered deletion results DataFrames.
+- output_dir (str): Directory path where to save the results.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.analyse_csm.save_reaction_deletion_results">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.analyse_csm.</span></span><span class="sig-name descname"><span class="pre">save_reaction_deletion_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Model</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gsmm/csm/analyse_csm.html#save_reaction_deletion_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.analyse_csm.save_reaction_deletion_results" title="Link to this definition"></a></dt>
+<dd><p>Perform single reaction deletion for each model in models_dict and save the results.</p>
+</dd></dl>
+
+</section>
+<section id="module-gsmm.csm.build_csm">
+<span id="gsmm-csm-build-csm-module"></span><h2>gsmm.csm.build_csm module<a class="headerlink" href="#module-gsmm.csm.build_csm" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.assign_reaction_confidences">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">assign_reaction_confidences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expression_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#assign_reaction_confidences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.assign_reaction_confidences" title="Link to this definition"></a></dt>
+<dd><p>Assign confidence levels to reactions based on associated genes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.extract_genes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">extract_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#extract_genes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.extract_genes" title="Link to this definition"></a></dt>
+<dd><p>Extract genes from expression data based on specified columns.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.filter_model_by_genes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">filter_model_by_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Model</span></span></span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#filter_model_by_genes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.filter_model_by_genes" title="Link to this definition"></a></dt>
+<dd><p>Filter a COBRA model to include only reactions associated with specified genes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.load_expression_data">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">load_expression_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#load_expression_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.load_expression_data" title="Link to this definition"></a></dt>
+<dd><p>Load expression data from CSV.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.main">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.main" title="Link to this definition"></a></dt>
+<dd><p>Main function to execute the workflow.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.normalize_expression_data">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">normalize_expression_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#normalize_expression_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.normalize_expression_data" title="Link to this definition"></a></dt>
+<dd><p>Normalize expression data and calculate confidence levels.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.optimize_model">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">optimize_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reaction_confidence_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">CORDA</span></span></span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#optimize_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.optimize_model" title="Link to this definition"></a></dt>
+<dd><p>Initialize and build CORDA model optimization.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.read_parent_model">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">read_parent_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Model</span></span></span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#read_parent_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.read_parent_model" title="Link to this definition"></a></dt>
+<dd><p>Load a COBRA model from SBML file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.build_csm.run_model_reconstruction">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.build_csm.</span></span><span class="sig-name descname"><span class="pre">run_model_reconstruction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gsmm/csm/build_csm.html#run_model_reconstruction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.build_csm.run_model_reconstruction" title="Link to this definition"></a></dt>
+<dd><p>Run model reconstruction using the specified paths and columns.</p>
+<p>Parameters:
+- model_path (str): Path to the XML model file.
+- data_path (str): Path to the input data CSV file.
+- gene_name_column (str or None): Column name for gene names (optional).
+- gene_id_column (str): Column name for gene IDs.
+- scores_column (str): Column name for scores.</p>
+<p>Returns:
+- str or None: Optimized model name if reconstruction is successful, else None.</p>
+</dd></dl>
+
+</section>
+<section id="module-gsmm.csm.config">
+<span id="gsmm-csm-config-module"></span><h2>gsmm.csm.config module<a class="headerlink" href="#module-gsmm.csm.config" title="Link to this heading"></a></h2>
+</section>
+<section id="module-gsmm.csm.visualisation">
+<span id="gsmm-csm-visualisation-module"></span><h2>gsmm.csm.visualisation module<a class="headerlink" href="#module-gsmm.csm.visualisation" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.visualisation.filter_and_save_results">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.visualisation.</span></span><span class="sig-name descname"><span class="pre">filter_and_save_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filtered_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gsmm/csm/visualisation.html#filter_and_save_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.visualisation.filter_and_save_results" title="Link to this definition"></a></dt>
+<dd><p>Filter and save valid DataFrames to a pickle file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.visualisation.load_data">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.visualisation.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gsmm/csm/visualisation.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.visualisation.load_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.visualisation.plot_flux_correlation_heatmap">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.visualisation.</span></span><span class="sig-name descname"><span class="pre">plot_flux_correlation_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_fluxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gsmm/csm/visualisation.html#plot_flux_correlation_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.visualisation.plot_flux_correlation_heatmap" title="Link to this definition"></a></dt>
+<dd><p>Generate a heatmap of correlation coefficients for fluxes between different models for all reactions.</p>
+<p>Parameters:
+- df_fluxes (pd.DataFrame): DataFrame with ‘Model’, ‘Reaction’, and ‘Flux’ columns.
+- save_path (str): Path to save the heatmap.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.visualisation.plot_flux_distribution_clustermap">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.visualisation.</span></span><span class="sig-name descname"><span class="pre">plot_flux_distribution_clustermap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_fluxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gsmm/csm/visualisation.html#plot_flux_distribution_clustermap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.visualisation.plot_flux_distribution_clustermap" title="Link to this definition"></a></dt>
+<dd><p>Generate a clustermap for flux distribution across different models and reactions.</p>
+<p>Parameters:
+- df_fluxes (pd.DataFrame): DataFrame with ‘Model’, ‘Reaction’, and ‘Flux’ columns.
+- save_path (str): Path to save the clustermap.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.visualisation.plot_fluxes">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.visualisation.</span></span><span class="sig-name descname"><span class="pre">plot_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flux_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'flux_data.pkl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink_flux_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'sink_flux_data.pkl'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gsmm/csm/visualisation.html#plot_fluxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.visualisation.plot_fluxes" title="Link to this definition"></a></dt>
+<dd><p>Plot flux distributions and sink fluxes using default or provided file paths.</p>
+<p>Parameters:
+- flux_filepath (str, optional): File path to flux data (default: ‘flux_data.pkl’).
+- sink_flux_filepath (str, optional): File path to sink flux data (default: ‘sink_flux_data.pkl’).</p>
+<p>Returns:
+- None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.visualisation.plot_sink_flux_correlation_heatmap">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.visualisation.</span></span><span class="sig-name descname"><span class="pre">plot_sink_flux_correlation_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_sink_fluxes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gsmm/csm/visualisation.html#plot_sink_flux_correlation_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.visualisation.plot_sink_flux_correlation_heatmap" title="Link to this definition"></a></dt>
+<dd><p>Generate a heatmap of correlation coefficients for sink fluxes between different models.</p>
+<p>Parameters:
+- df_sink_fluxes (pd.DataFrame): DataFrame with ‘Metabolite’, ‘Flux’, ‘Context_Model’ columns.
+- save_path (str): Path to save the heatmap.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gsmm.csm.visualisation.plot_sink_fluxes_heatmap">
+<span class="sig-prename descclassname"><span class="pre">gsmm.csm.visualisation.</span></span><span class="sig-name descname"><span class="pre">plot_sink_fluxes_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gsmm/csm/visualisation.html#plot_sink_fluxes_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gsmm.csm.visualisation.plot_sink_fluxes_heatmap" title="Link to this definition"></a></dt>
+<dd><p>Plot a heatmap for sink fluxes across different context models.</p>
+<p>Parameters:
+- df (pd.DataFrame): DataFrame containing sink flux data with columns ‘Metabolite’, ‘Flux’, ‘Context_Model’.
+- output_file (str): Path to save the sink fluxes heatmap.</p>
+</dd></dl>
+
+</section>
+<section id="module-gsmm.csm">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gsmm.csm" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gsmm.html" class="btn btn-neutral float-left" title="gsmm package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Karthik Dani.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

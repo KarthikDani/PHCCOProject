@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import logging
 from typing import Optional
-from config import *
+from .config import *
 import pickle
 
 # Configure logging

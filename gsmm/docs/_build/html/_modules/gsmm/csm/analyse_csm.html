@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gsmm.csm.analyse_csm &mdash; GSMM 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=92734c54"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            GSMM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">gsmm</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">GSMM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">gsmm.csm.analyse_csm</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gsmm.csm.analyse_csm</h1><div class="highlight"><pre>
+<span></span><span class="c1"># flux_analysis.py</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">cobra.io</span> <span class="kn">import</span> <span class="n">read_sbml_model</span>
+<span class="kn">from</span> <span class="nn">cobra.core</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">cobra.exceptions</span> <span class="kn">import</span> <span class="n">OptimizationError</span><span class="p">,</span> <span class="n">Infeasible</span>
+<span class="kn">from</span> <span class="nn">cobra.flux_analysis</span> <span class="kn">import</span> <span class="n">single_reaction_deletion</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">.config</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Configure logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Function to load SBML models</span>
+<div class="viewcode-block" id="load_models">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.load_models">[docs]</a>
+<span class="k">def</span> <span class="nf">load_models</span><span class="p">(</span><span class="n">model_paths</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">]:</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">model_paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loading model: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: File not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">models</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_sbml_model</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded model: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully loaded model: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading model </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading model </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">models</span></div>
+
+
+
+<span class="c1"># Function to optimize the model and get flux distributions</span>
+<div class="viewcode-block" id="optimize_and_get_fluxes">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.optimize_and_get_fluxes">[docs]</a>
+<span class="k">def</span> <span class="nf">optimize_and_get_fluxes</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimizing model: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="n">solution</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimization completed for model: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">solution</span><span class="o">.</span><span class="n">fluxes</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">OptimizationError</span><span class="p">,</span> <span class="n">Infeasible</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimization failed for model </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimization failed for model </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+
+
+<span class="c1"># Function to extract fluxes from models</span>
+<div class="viewcode-block" id="extract_fluxes">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.extract_fluxes">[docs]</a>
+<span class="k">def</span> <span class="nf">extract_fluxes</span><span class="p">(</span><span class="n">models</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">fluxes_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracting fluxes for model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="n">fluxes</span> <span class="o">=</span> <span class="n">optimize_and_get_fluxes</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">reaction</span><span class="p">,</span> <span class="n">flux</span> <span class="ow">in</span> <span class="n">fluxes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">fluxes_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;Reaction&#39;</span><span class="p">:</span> <span class="n">reaction</span><span class="p">,</span>
+                <span class="s1">&#39;Flux&#39;</span><span class="p">:</span> <span class="n">flux</span><span class="p">,</span>
+                <span class="s1">&#39;Model&#39;</span><span class="p">:</span> <span class="n">model_name</span>
+            <span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flux extraction complete.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">fluxes_data</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Function to filter non-zero fluxes</span>
+<div class="viewcode-block" id="filter_non_zero_fluxes">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.filter_non_zero_fluxes">[docs]</a>
+<span class="k">def</span> <span class="nf">filter_non_zero_fluxes</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s1">&#39;Flux&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;DataFrame must contain &#39;Flux&#39; column&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Filtering fluxes with threshold: </span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Flux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Flux&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Filtering complete. Number of reactions above threshold: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered_df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">filtered_df</span></div>
+
+
+
+<span class="c1"># Function to extract sink reaction fluxes</span>
+<div class="viewcode-block" id="get_sink_fluxes">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.get_sink_fluxes">[docs]</a>
+<span class="k">def</span> <span class="nf">get_sink_fluxes</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metabolites</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]:</span>
+    <span class="n">sink_fluxes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">met_id</span> <span class="ow">in</span> <span class="n">metabolites</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">met</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">metabolites</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">met_id</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">reaction</span> <span class="ow">in</span> <span class="n">met</span><span class="o">.</span><span class="n">reactions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">reaction</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;SK&quot;</span><span class="p">):</span>
+                    <span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+                        <span class="n">solution</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+                        <span class="n">flux</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">fluxes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reaction</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">sink_fluxes</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                            <span class="s2">&quot;Metabolite&quot;</span><span class="p">:</span> <span class="n">met</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                            <span class="s2">&quot;Flux&quot;</span><span class="p">:</span> <span class="n">flux</span><span class="p">,</span>
+                            <span class="s2">&quot;Context_Model&quot;</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span>
+                        <span class="p">})</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metabolite </span><span class="si">{</span><span class="n">met_id</span><span class="si">}</span><span class="s2"> not found in model </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Metabolite </span><span class="si">{</span><span class="n">met_id</span><span class="si">}</span><span class="s2"> not found in model </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">OptimizationError</span><span class="p">,</span> <span class="n">Infeasible</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimization failed for reaction </span><span class="si">{</span><span class="n">reaction</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> in model </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimization failed for reaction </span><span class="si">{</span><span class="n">reaction</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> in model </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracted sink fluxes for model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sink_fluxes</span></div>
+
+
+
+<span class="c1"># Function to collect sink fluxes for all context-specific models</span>
+<div class="viewcode-block" id="collect_sink_fluxes">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.collect_sink_fluxes">[docs]</a>
+<span class="k">def</span> <span class="nf">collect_sink_fluxes</span><span class="p">(</span><span class="n">models</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">],</span> <span class="n">metabolites</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">all_sink_fluxes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collecting sink fluxes for model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="n">sink_fluxes</span> <span class="o">=</span> <span class="n">get_sink_fluxes</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">metabolites</span><span class="p">)</span>
+        <span class="n">all_sink_fluxes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sink_fluxes</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sink flux collection complete.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">all_sink_fluxes</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Function to save data for visualization</span>
+<div class="viewcode-block" id="save_data_for_visualization">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.save_data_for_visualization">[docs]</a>
+<span class="k">def</span> <span class="nf">save_data_for_visualization</span><span class="p">(</span><span class="n">df_fluxes</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">df_sink_fluxes</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;flux_data.pkl&#39;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving data to </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="n">df_fluxes</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">df_sink_fluxes</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;flux&#39;</span><span class="p">,</span> <span class="s1">&#39;sink_flux&#39;</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved to </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;flux&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;sink_flux&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved successfully to </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;flux&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;sink_flux&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to save data: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Failed to save data: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+        
+        
+<span class="c1"># Single reaction deletions</span>
+<span class="c1"># Function to perform single reaction deletion on a model</span>
+<div class="viewcode-block" id="perform_single_reaction_deletion">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.perform_single_reaction_deletion">[docs]</a>
+<span class="k">def</span> <span class="nf">perform_single_reaction_deletion</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform single reaction deletion on the given model.&quot;&quot;&quot;</span>
+    <span class="n">deletion_results</span> <span class="o">=</span> <span class="n">single_reaction_deletion</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">deletion_results</span></div>
+
+
+<span class="c1"># Function to save reaction deletion results for each model</span>
+<div class="viewcode-block" id="save_reaction_deletion_results">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.save_reaction_deletion_results">[docs]</a>
+<span class="k">def</span> <span class="nf">save_reaction_deletion_results</span><span class="p">(</span><span class="n">models_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">],</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform single reaction deletion for each model in models_dict and save the results.&quot;&quot;&quot;</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Performing single reaction deletion on </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="n">deletion_results</span> <span class="o">=</span> <span class="n">perform_single_reaction_deletion</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">deletion_results</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">_reaction_deletion_results.pkl&quot;</span>
+        <span class="n">deletion_results</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved single reaction deletion results for </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span></div>
+
+
+<span class="c1"># Function to find common reactions across all models</span>
+<div class="viewcode-block" id="find_common_reactions">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.find_common_reactions">[docs]</a>
+<span class="k">def</span> <span class="nf">find_common_reactions</span><span class="p">(</span><span class="n">reaction_deletion_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find common reactions across all models.&quot;&quot;&quot;</span>
+    <span class="n">reaction_sets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">reaction_deletion_results</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+    <span class="n">common_reactions</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="o">*</span><span class="n">reaction_sets</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">common_reactions</span><span class="p">)</span></div>
+
+
+<span class="c1"># Function to filter deletion results to keep only common reactions</span>
+<div class="viewcode-block" id="filter_deletion_results">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.filter_deletion_results">[docs]</a>
+<span class="k">def</span> <span class="nf">filter_deletion_results</span><span class="p">(</span><span class="n">deletion_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span> <span class="n">common_reactions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter reaction deletion results to keep only common reactions.&quot;&quot;&quot;</span>
+    <span class="n">filtered_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">deletion_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">filtered_results</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">common_reactions</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">filtered_results</span></div>
+
+
+<span class="c1"># Function to save filtered reaction deletion results</span>
+<div class="viewcode-block" id="save_filtered_reaction_deletion_results">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.save_filtered_reaction_deletion_results">[docs]</a>
+<span class="k">def</span> <span class="nf">save_filtered_reaction_deletion_results</span><span class="p">(</span><span class="n">filtered_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save filtered reaction deletion results to pickle files.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - filtered_results (Dict[str, pd.DataFrame]): Dictionary mapping model names to filtered deletion results DataFrames.</span>
+<span class="sd">    - output_dir (str): Directory path where to save the results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">filtered_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">_filtered_reaction_deletion_results.pkl&quot;</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved filtered reaction deletion results for </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving filtered reaction deletion results: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="run_single_reaction_deletion">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.run_single_reaction_deletion">[docs]</a>
+<span class="k">def</span> <span class="nf">run_single_reaction_deletion</span><span class="p">():</span>
+
+    <span class="c1"># Load models</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="n">load_models</span><span class="p">(</span><span class="n">model_paths</span><span class="p">)</span>
+
+    <span class="c1"># Perform and save reaction deletion results</span>
+    <span class="n">reaction_deletion_results</span> <span class="o">=</span> <span class="n">save_reaction_deletion_results</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+
+    <span class="c1"># Find common reactions</span>
+    <span class="n">common_reactions</span> <span class="o">=</span> <span class="n">find_common_reactions</span><span class="p">(</span><span class="n">reaction_deletion_results</span><span class="p">)</span>
+
+    <span class="c1"># Filter deletion results to keep only common reactions</span>
+    <span class="n">filtered_reaction_deletion_results</span> <span class="o">=</span> <span class="n">filter_deletion_results</span><span class="p">(</span><span class="n">reaction_deletion_results</span><span class="p">,</span> <span class="n">common_reactions</span><span class="p">)</span>
+
+    <span class="c1"># Save filtered reaction deletion results</span>
+    <span class="n">save_filtered_reaction_deletion_results</span><span class="p">(</span><span class="n">filtered_reaction_deletion_results</span><span class="p">,</span> <span class="n">output_dir__reaction_deletion_results</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="analyse_and_save_fluxes">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.analyse_and_save_fluxes">[docs]</a>
+<span class="k">def</span> <span class="nf">analyse_and_save_fluxes</span><span class="p">(</span><span class="n">model_paths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze fluxes from given model paths and save the results.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - model_paths (dict, optional): Dictionary containing model names as keys and file paths as values. Defaults to None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model_paths</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expected model_paths to be a dictionary.&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Load models</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="n">load_models</span><span class="p">(</span><span class="n">model_paths</span><span class="p">)</span>
+
+    <span class="c1"># Extract and filter fluxes</span>
+    <span class="n">df_fluxes</span> <span class="o">=</span> <span class="n">extract_fluxes</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+    <span class="n">df_fluxes_filtered</span> <span class="o">=</span> <span class="n">filter_non_zero_fluxes</span><span class="p">(</span><span class="n">df_fluxes</span><span class="p">)</span>
+
+    <span class="c1"># Collect sink fluxes</span>
+    <span class="n">df_sink_fluxes</span> <span class="o">=</span> <span class="n">collect_sink_fluxes</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">metabolites_of_interest</span><span class="p">)</span>
+
+    <span class="c1"># Save data for visualization</span>
+    <span class="n">save_data_for_visualization</span><span class="p">(</span><span class="n">df_fluxes_filtered</span><span class="p">,</span> <span class="n">df_sink_fluxes</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Karthik Dani.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -139,7 +139,8 @@ def main(model_path: str, data_path: str, gene_name_column: Union[str, None], ge
     
     return optimized_model.cobra_model(scores_column)
 
-def run_model_reconstruction(model_path: str, data_path: str,
+def run_model_reconstruction(model_path: str, 
+                             data_path: str,
                              gene_name_column: Optional[str],
                              gene_id_column: str,
                              scores_column: str) -> Optional[str]:

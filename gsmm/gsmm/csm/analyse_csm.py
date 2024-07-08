@@ -9,7 +9,7 @@ from cobra.exceptions import OptimizationError, Infeasible
 from cobra.flux_analysis import single_reaction_deletion
 import logging
 import os
-from config import *
+from .config import *
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -197,8 +197,7 @@ def analyse_and_save_fluxes(model_paths: Optional[Dict[str, str]] = None) -> Non
     Analyze fluxes from given model paths and save the results.
 
     Parameters:
-    - model_paths (dict, optional): Dictionary containing model names as keys and file paths as values.
-                                    Defaults to None.
+    - model_paths (dict, optional): Dictionary containing model names as keys and file paths as values. Defaults to None.
 
     Returns:
     - None
