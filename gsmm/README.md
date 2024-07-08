@@ -1,4 +1,4 @@
-# GSSM 
+# GSMM 
 ## An Open Source Tool for Building and Analysing Context Specific Metabolic Models and Generate visualisations.
 
 ## Overview
@@ -15,7 +15,7 @@ GSMM is a Python-based toolkit for Genome Scale Metabolic Modeling, designed for
 
 ## Documentation
 
-For detailed documentation of the source code, please visit [GSSM Documentation](https://gsmm.readthedocs.io/en/latest/).
+For detailed documentation of the source code, please visit [GSMM Documentation](https://gsmm.readthedocs.io/en/latest/).
 
 ## File Structure
 
