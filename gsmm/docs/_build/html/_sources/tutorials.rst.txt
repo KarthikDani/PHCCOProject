@@ -1,0 +1,9 @@
+Tutorials
+==============================
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+
+   notebooks/build_csm.rst
+   notebooks/analyse_csm.rst

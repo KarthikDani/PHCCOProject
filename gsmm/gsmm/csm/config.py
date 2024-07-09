@@ -1,11 +1,12 @@
-# Define model paths
-model_paths = {
-    "ModelE": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/Epithelial_csm.xml",
-    "ModelM": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/Mesenchymal_csm.xml",
-    "ModelMF": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/mesenchymal_fasting_integrated_csm.xml",
-}
+# Define model names and their paths
+# model_paths = {
+#     "ModelE": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/Epithelial_csm.xml",
+#     "ModelM": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/Mesenchymal_csm.xml",
+#     "ModelMF": "/Users/karthik/Desktop/PHCCO IISc Internship/Models/mesenchymal_fasting_integrated_csm.xml",
+# }
 
-# List of metabolites of interest
+# base_model_path = "base_model.xml"  # Path to save the filtered SBML model, i,e base model to carry out reconstruction
+
 metabolites_of_interest = [
     "ala__L_c", "arg__L_c", "asn__L_c", "asp__L_c", "cys__L_c", "gln__L_c",
     "glu__L_c", "gly_c", "his__L_c", "ile__L_c", "leu__L_c", "lys__L_c",
@@ -20,8 +21,12 @@ metabolites_of_interest = [
     "h2o_c", "h_c",
 ]
 
-flux_filepath = 'flux_data.pkl'
-sink_flux_filepath = 'sink_flux_data.pkl'
+gene_id_column = "Gene_ID"  # Column name in expression data containing gene IDs
 
-output_dir__reaction_deletion_results = 'reaction_deletion_results'
-output_dir = '.'
+flux_filepath = 'flux_data.pkl'  # Filepath for storing flux data
+
+sink_flux_filepath = 'sink_flux_data.pkl'  # Filepath for storing sink flux data
+
+output_dir__reaction_deletion_results = 'reaction_deletion_results'  # Directory for storing reaction deletion results
+
+output_dir = '.'  # Output directory for various analysis outputs

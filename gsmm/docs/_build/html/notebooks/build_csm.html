@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Context Specific Metabolic Models &mdash; GSMM 0.1.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8618f531"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Analysis of Context Specific Metabolic Models" href="analyse_csm.html" />
+    <link rel="prev" title="Tutorials" href="../tutorials.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            GSMM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building Context Specific Metabolic Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#load-expression-data">Load expression data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-recon3d-model-from-the-web">Load Recon3D model from the web</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structure-of-a-cobrapy-sbml-model">Structure of a COBRApy SBML Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#now-we-load-recon3d-model-as-the-parent-model-from-which-the-base-model-will-be-created-following-gsmm-librarys-functions-to-further-reconstruct-context-specific-models-be-done">Now we load <code class="docutils literal notranslate"><span class="pre">Recon3D</span></code> model as the parent model from which the base model will be created following <code class="docutils literal notranslate"><span class="pre">gsmm</span></code> library’s functions, to further reconstruct context specific models be done.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#we-save-recon3d-as-xml-file">We save <code class="docutils literal notranslate"><span class="pre">Recon3D</span></code> as <code class="docutils literal notranslate"><span class="pre">.xml</span></code> file.</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#running-model-reconstruction-to-get-context-specific-model">Running Model Reconstruction to get Context-Specific Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#save-the-csms-for-further-analysis-and-plots">Save the CSMs for further analysis and plots</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analyse_csm.html">Analysis of Context Specific Metabolic Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">gsmm</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GSMM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Building Context Specific Metabolic Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/build_csm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-context-specific-metabolic-models">
+<h1>Building Context Specific Metabolic Models<a class="headerlink" href="#building-context-specific-metabolic-models" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run_model_reconstruction</span></code> from <code class="docutils literal notranslate"><span class="pre">gsmm.csm.build_csm</span></code>: Used for
+running the model reconstruction pipeline.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cobra</span></code>: A package for constraint-based reconstruction and
+analysis.</p></li>
+</ul>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gsmm.csm.build_csm</span> <span class="kn">import</span> <span class="n">run_model_reconstruction</span>
+
+<span class="kn">import</span> <span class="nn">cobra</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+<section id="load-expression-data">
+<h2>Load expression data<a class="headerlink" href="#load-expression-data" title="Link to this heading"></a></h2>
+<p>For example, let’s an EMT expression data to follow along this tutorial
+- <code class="docutils literal notranslate"><span class="pre">emt_expression_data_path</span></code>: Path to the CSV file containing the EMT
+expression data. - <code class="docutils literal notranslate"><span class="pre">emt_expression_data</span></code>: DataFrame holding the loaded
+EMT expression data.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">emt_expression_data_path</span> <span class="o">=</span> <span class="s2">&quot;../../Data/InputData/EMT_FINAL_DATA.csv&quot;</span>
+<span class="n">emt_expression_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">emt_expression_data_path</span><span class="p">)</span>
+<span class="n">emt_expression_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Gene_ID</th>
+      <th>Mesenchymal</th>
+      <th>Epithelial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2978_AT1</td>
+      <td>1.590799</td>
+      <td>-7.624877</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1571_AT1</td>
+      <td>6.046029</td>
+      <td>3.480441</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1549_AT1</td>
+      <td>2.358338</td>
+      <td>3.101581</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1548_AT1</td>
+      <td>2.358338</td>
+      <td>3.101581</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>949_AT1</td>
+      <td>8.881953</td>
+      <td>8.613039</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section id="load-recon3d-model-from-the-web">
+<h2>Load Recon3D model from the web<a class="headerlink" href="#load-recon3d-model-from-the-web" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">recon_model</span></code>: The Recon3D model loaded from a web source using
+COBRApy.</p></li>
+</ul>
+<p>This step loads the Recon3D model, a comprehensive genome-scale
+metabolic model. Recon3D integrates metabolic data from various human
+tissues and is widely used for studying human metabolism.</p>
+</section>
+<section id="structure-of-a-cobrapy-sbml-model">
+<h2>Structure of a COBRApy SBML Model<a class="headerlink" href="#structure-of-a-cobrapy-sbml-model" title="Link to this heading"></a></h2>
+<figure class="align-default" id="id1">
+<img alt="Cobrapy Model Structure" src="../_images/cobrapy_model_structure.png" />
+<figcaption>
+<p><span class="caption-text">Cobrapy Model Structure</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In COBRApy, a SBML model is structured as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Model</span></code>: The core object representing the metabolic model. It
+contains several attributes and methods to manipulate and analyze the
+model.</p>
+<ul>
+<li><p><strong>Attributes</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">reactions</span></code>: A list of <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects representing the
+biochemical reactions in the model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metabolites</span></code>: A list of <code class="docutils literal notranslate"><span class="pre">Metabolite</span></code> objects representing
+the metabolites in the model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">genes</span></code>: A list of <code class="docutils literal notranslate"><span class="pre">Gene</span></code> objects representing the genes
+associated with the reactions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">objective</span></code>: The objective function of the model, typically
+used in flux balance analysis (FBA).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: A unique identifier for the model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A descriptive name for the model.</p></li>
+</ul>
+</li>
+<li><p><strong>Methods</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimize()</span></code>: Performs flux balance analysis to optimize the
+objective function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">summary()</span></code>: Provides a summary of the model, including the
+number of reactions, metabolites, and genes.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Reaction</span></code>: Represents a biochemical reaction in the model.</p>
+<ul>
+<li><p><strong>Attributes</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: A unique identifier for the reaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A descriptive name for the reaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metabolites</span></code>: A dictionary of <code class="docutils literal notranslate"><span class="pre">Metabolite</span></code> objects and
+their stoichiometric coefficients in the reaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lower_bound</span></code>: The lower bound of the reaction flux.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upper_bound</span></code>: The upper bound of the reaction flux.</p></li>
+</ul>
+</li>
+<li><p><strong>Methods</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_metabolites(metabolites)</span></code>: Adds metabolites to the
+reaction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove_metabolites(metabolites)</span></code>: Removes metabolites from
+the reaction.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Metabolite</span></code>: Represents a metabolite in the model.</p>
+<ul>
+<li><p><strong>Attributes</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: A unique identifier for the metabolite.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A descriptive name for the metabolite.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">formula</span></code>: The chemical formula of the metabolite.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compartment</span></code>: The compartment where the metabolite is
+located.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Gene</span></code>: Represents a gene in the model.</p>
+<ul>
+<li><p><strong>Attributes</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: A unique identifier for the gene.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: A descriptive name for the gene.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reactions</span></code>: A list of <code class="docutils literal notranslate"><span class="pre">Reaction</span></code> objects associated with
+the gene.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="now-we-load-recon3d-model-as-the-parent-model-from-which-the-base-model-will-be-created-following-gsmm-librarys-functions-to-further-reconstruct-context-specific-models-be-done">
+<h2>Now we load <code class="docutils literal notranslate"><span class="pre">Recon3D</span></code> model as the parent model from which the base model will be created following <code class="docutils literal notranslate"><span class="pre">gsmm</span></code> library’s functions, to further reconstruct context specific models be done.<a class="headerlink" href="#now-we-load-recon3d-model-as-the-parent-model-from-which-the-base-model-will-be-created-following-gsmm-librarys-functions-to-further-reconstruct-context-specific-models-be-done" title="Link to this heading"></a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recon_model</span> <span class="o">=</span> <span class="n">cobra</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;Recon3D&quot;</span><span class="p">)</span>
+<span class="n">recon_model</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">22</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">26</span><span class="p">,</span><span class="mi">787</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<table>
+    <tr>
+        <td><strong>Name</strong></td>
+        <td>Recon3D</td>
+    </tr><tr>
+        <td><strong>Memory address</strong></td>
+        <td>106b88ed0</td>
+    </tr><tr>
+        <td><strong>Number of metabolites</strong></td>
+        <td>5835</td>
+    </tr><tr>
+        <td><strong>Number of reactions</strong></td>
+        <td>10600</td>
+    </tr><tr>
+        <td><strong>Number of genes</strong></td>
+        <td>2248</td>
+    </tr><tr>
+        <td><strong>Number of groups</strong></td>
+        <td>0</td>
+    </tr><tr>
+        <td><strong>Objective expression</strong></td>
+        <td>1.0*BIOMASS_maintenance - 1.0*BIOMASS_maintenance_reverse_5b3f9</td>
+    </tr><tr>
+        <td><strong>Compartments</strong></td>
+        <td>cytosol, lysosome, mitochondria, endoplasmic reticulum, extracellular space, peroxisome/glyoxysome, nucleus, golgi apparatus, inner mitochondrial compartment</td>
+    </tr>
+  </table><section id="we-save-recon3d-as-xml-file">
+<h3>We save <code class="docutils literal notranslate"><span class="pre">Recon3D</span></code> as <code class="docutils literal notranslate"><span class="pre">.xml</span></code> file.<a class="headerlink" href="#we-save-recon3d-as-xml-file" title="Link to this heading"></a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cobra</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_sbml_model</span><span class="p">(</span><span class="n">recon_model</span><span class="p">,</span> <span class="s2">&quot;recon_model.xml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Reconstruction algorithm in <code class="docutils literal notranslate"><span class="pre">gsmm</span></code> needs, 1. <code class="docutils literal notranslate"><span class="pre">parent_model_path</span></code>:
+<code class="docutils literal notranslate"><span class="pre">Recon3D</span></code> in this case. 2. <code class="docutils literal notranslate"><span class="pre">base_model_path</span></code>: All the unneccessary
+genes, reactions and metabolites are removed, then the model is saved as
+<code class="docutils literal notranslate"><span class="pre">base_model</span></code>. 3. <code class="docutils literal notranslate"><span class="pre">gene_id_column</span></code>: Expression data in our case has
+<code class="docutils literal notranslate"><span class="pre">gene</span> <span class="pre">ids</span></code> in the column called <code class="docutils literal notranslate"><span class="pre">Gene_ID</span></code>. We need to tell the
+algorithm that this is our <code class="docutils literal notranslate"><span class="pre">gene</span> <span class="pre">id</span></code> column.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parent_model_path</span> <span class="o">=</span> <span class="s2">&quot;recon_model.xml&quot;</span>
+<span class="n">base_model_path</span> <span class="o">=</span> <span class="s2">&quot;recon_model.xml&quot;</span>
+<span class="n">gene_id_column</span> <span class="o">=</span> <span class="s2">&quot;Gene_ID&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-model-reconstruction-to-get-context-specific-model">
+<h2>Running Model Reconstruction to get Context-Specific Model<a class="headerlink" href="#running-model-reconstruction-to-get-context-specific-model" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">run_model_reconstruction(..)</span></code> takes care of the interface to run the
+main pipeline for reconstructing an optimized metabolic model from the
+provided expression data. It handles exceptions and prints error
+messages if reconstruction fails, returning None in case of errors.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epithelial_csm</span> <span class="o">=</span> <span class="n">run_model_reconstruction</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">parent_model_path</span><span class="p">,</span>
+                                          <span class="n">base_model_path</span><span class="o">=</span><span class="n">base_model_path</span><span class="p">,</span>
+                                          <span class="n">data_path</span><span class="o">=</span><span class="n">emt_expression_data_path</span><span class="p">,</span>
+                                          <span class="n">gene_id_column</span><span class="o">=</span><span class="n">gene_id_column</span><span class="p">,</span>
+                                          <span class="n">scores_column</span><span class="o">=</span><span class="s2">&quot;Epithelial&quot;</span><span class="p">,</span>
+                                          <span class="p">)</span>
+<span class="n">epithelial_csm</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="mi">201</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Cobra Configuration set to GLPK solver!
+Loading SBML model from recon_model.xml...
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span><span class="mi">085</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SBML</span> <span class="n">model</span> <span class="n">loaded</span><span class="o">.</span>
+<span class="n">Loading</span> <span class="n">expression</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">..</span><span class="o">/../</span><span class="n">Data</span><span class="o">/</span><span class="n">InputData</span><span class="o">/</span><span class="n">EMT_FINAL_DATA</span><span class="o">.</span><span class="n">csv</span><span class="o">...</span>
+<span class="n">Expression</span> <span class="n">data</span> <span class="n">loaded</span><span class="o">.</span>
+<span class="n">Extracting</span> <span class="n">genes</span> <span class="kn">from</span> <span class="nn">Gene_ID</span> <span class="n">column</span><span class="o">...</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">Genes</span> <span class="n">extracted</span><span class="p">:</span> <span class="mi">1786</span>
+<span class="n">Filtering</span> <span class="n">model</span> <span class="n">by</span> <span class="n">genes</span><span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="mi">796</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+<span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span><span class="mi">691</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span> <span class="n">filtered</span><span class="o">.</span>
+<span class="n">Normalizing</span> <span class="n">expression</span> <span class="n">data</span><span class="o">...</span>
+<span class="n">Expression</span> <span class="n">data</span> <span class="n">has</span> <span class="n">been</span> <span class="n">normalized</span><span class="o">.</span>
+<span class="n">Assigning</span> <span class="n">confidence</span> <span class="n">levels</span> <span class="n">to</span> <span class="n">reactions</span> <span class="n">giving</span> <span class="n">highest</span> <span class="n">confidence</span> <span class="n">levels</span> <span class="n">to</span> <span class="n">Biomass</span> <span class="n">reactions</span><span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">07</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span><span class="mi">589</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reaction</span> <span class="n">Confidences</span><span class="p">:</span>                 <span class="n">Reaction_ID</span>  <span class="n">Confidence_Level</span>
+<span class="mi">0</span>           <span class="mi">24_25</span><span class="n">DHVITD3tm</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">1</span>                <span class="mi">25</span><span class="n">HVITD3t</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">2</span>                    <span class="n">COAtl</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">3</span>       <span class="n">EX_5adtststerone_e</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">4</span>      <span class="n">EX_5adtststerones_e</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="o">...</span>                    <span class="o">...</span>               <span class="o">...</span>
+<span class="mi">10436</span>         <span class="n">ACMPGLUTTRsc</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">10437</span>             <span class="n">FVSCOAhc</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">10438</span>             <span class="n">MDZGLChr</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">10439</span>             <span class="n">TMACMPhr</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">10440</span>           <span class="n">CYSACMPitr</span>                <span class="o">-</span><span class="mi">1</span>
+
+<span class="p">[</span><span class="mi">10441</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">2</span> <span class="n">columns</span><span class="p">]</span>
+<span class="n">Reaction</span> <span class="n">confidence</span> <span class="n">levels</span> <span class="n">saved</span> <span class="k">as</span> <span class="n">reaction_Epithelial_confidence_levels</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span>
+<span class="n">Initializing</span> <span class="ow">and</span> <span class="n">building</span> <span class="n">CORDA</span> <span class="n">model</span><span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">08</span><span class="p">,</span><span class="mi">413</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CORDA</span> <span class="n">model</span> <span class="n">optimization</span> <span class="n">completed</span><span class="o">.</span>
+<span class="n">Optimized</span> <span class="n">CORDA</span> <span class="n">model</span><span class="p">:</span>
+<span class="n">build</span> <span class="n">status</span><span class="p">:</span> <span class="n">reconstruction</span> <span class="n">complete</span>
+<span class="n">Inc</span><span class="o">.</span> <span class="n">reactions</span><span class="p">:</span> <span class="mi">1539</span><span class="o">/</span><span class="mi">10441</span>
+ <span class="o">-</span> <span class="n">unclear</span><span class="p">:</span> <span class="mi">213</span><span class="o">/</span><span class="mi">1071</span>
+ <span class="o">-</span> <span class="n">exclude</span><span class="p">:</span> <span class="mi">738</span><span class="o">/</span><span class="mi">6995</span>
+ <span class="o">-</span> <span class="n">low</span> <span class="ow">and</span> <span class="n">medium</span><span class="p">:</span> <span class="mi">360</span><span class="o">/</span><span class="mi">2145</span>
+ <span class="o">-</span> <span class="n">high</span><span class="p">:</span> <span class="mi">228</span><span class="o">/</span><span class="mi">230</span>
+
+<span class="n">Reconstruction</span> <span class="n">completed</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">parent</span> <span class="n">model</span> <span class="n">Recon3D</span>
+</pre></div>
+</div>
+<table>
+    <tr>
+        <td><strong>Name</strong></td>
+        <td>Recon3D</td>
+    </tr><tr>
+        <td><strong>Memory address</strong></td>
+        <td>3317be8d0</td>
+    </tr><tr>
+        <td><strong>Number of metabolites</strong></td>
+        <td>1198</td>
+    </tr><tr>
+        <td><strong>Number of reactions</strong></td>
+        <td>1539</td>
+    </tr><tr>
+        <td><strong>Number of genes</strong></td>
+        <td>683</td>
+    </tr><tr>
+        <td><strong>Number of groups</strong></td>
+        <td>0</td>
+    </tr><tr>
+        <td><strong>Objective expression</strong></td>
+        <td>1.0*BIOMASS_maintenance - 1.0*BIOMASS_maintenance_reverse_5b3f9</td>
+    </tr><tr>
+        <td><strong>Compartments</strong></td>
+        <td>cytosol, mitochondria, peroxisome/glyoxysome, extracellular space, golgi apparatus, lysosome, endoplasmic reticulum, nucleus</td>
+    </tr>
+  </table><p>Similarly we do so to get <code class="docutils literal notranslate"><span class="pre">mesenchymal</span></code> context specific metabolic
+model.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mesenchymal_csm</span> <span class="o">=</span> <span class="n">run_model_reconstruction</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">parent_model_path</span><span class="p">,</span>
+                                          <span class="n">base_model_path</span><span class="o">=</span><span class="n">base_model_path</span><span class="p">,</span>
+                                          <span class="n">data_path</span><span class="o">=</span><span class="n">emt_expression_data_path</span><span class="p">,</span>
+                                          <span class="n">gene_id_column</span><span class="o">=</span><span class="n">gene_id_column</span><span class="p">,</span>
+                                          <span class="n">scores_column</span><span class="o">=</span><span class="s2">&quot;Mesenchymal&quot;</span><span class="p">,</span>
+                                          <span class="p">)</span>
+<span class="n">mesenchymal_csm</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">993</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Cobra Configuration set to GLPK solver!
+Loading SBML model from recon_model.xml...
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">45</span><span class="p">,</span><span class="mi">448</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SBML</span> <span class="n">model</span> <span class="n">loaded</span><span class="o">.</span>
+<span class="n">Loading</span> <span class="n">expression</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">..</span><span class="o">/../</span><span class="n">Data</span><span class="o">/</span><span class="n">InputData</span><span class="o">/</span><span class="n">EMT_FINAL_DATA</span><span class="o">.</span><span class="n">csv</span><span class="o">...</span>
+<span class="n">Expression</span> <span class="n">data</span> <span class="n">loaded</span><span class="o">.</span>
+<span class="n">Extracting</span> <span class="n">genes</span> <span class="kn">from</span> <span class="nn">Gene_ID</span> <span class="n">column</span><span class="o">...</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">Genes</span> <span class="n">extracted</span><span class="p">:</span> <span class="mi">1786</span>
+<span class="n">Filtering</span> <span class="n">model</span> <span class="n">by</span> <span class="n">genes</span><span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span><span class="mi">399</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+<span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span><span class="mi">240</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span> <span class="n">filtered</span><span class="o">.</span>
+<span class="n">Normalizing</span> <span class="n">expression</span> <span class="n">data</span><span class="o">...</span>
+<span class="n">Expression</span> <span class="n">data</span> <span class="n">has</span> <span class="n">been</span> <span class="n">normalized</span><span class="o">.</span>
+<span class="n">Assigning</span> <span class="n">confidence</span> <span class="n">levels</span> <span class="n">to</span> <span class="n">reactions</span> <span class="n">giving</span> <span class="n">highest</span> <span class="n">confidence</span> <span class="n">levels</span> <span class="n">to</span> <span class="n">Biomass</span> <span class="n">reactions</span><span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">09</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">54</span><span class="p">,</span><span class="mi">345</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reaction</span> <span class="n">Confidences</span><span class="p">:</span>                 <span class="n">Reaction_ID</span>  <span class="n">Confidence_Level</span>
+<span class="mi">0</span>           <span class="mi">24_25</span><span class="n">DHVITD3tm</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">1</span>                <span class="mi">25</span><span class="n">HVITD3t</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">2</span>                    <span class="n">COAtl</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">3</span>       <span class="n">EX_5adtststerone_e</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">4</span>      <span class="n">EX_5adtststerones_e</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="o">...</span>                    <span class="o">...</span>               <span class="o">...</span>
+<span class="mi">10436</span>         <span class="n">ACMPGLUTTRsc</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">10437</span>             <span class="n">FVSCOAhc</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">10438</span>             <span class="n">MDZGLChr</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">10439</span>             <span class="n">TMACMPhr</span>                <span class="o">-</span><span class="mi">1</span>
+<span class="mi">10440</span>           <span class="n">CYSACMPitr</span>                <span class="o">-</span><span class="mi">1</span>
+
+<span class="p">[</span><span class="mi">10441</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">2</span> <span class="n">columns</span><span class="p">]</span>
+<span class="n">Reaction</span> <span class="n">confidence</span> <span class="n">levels</span> <span class="n">saved</span> <span class="k">as</span> <span class="n">reaction_Mesenchymal_confidence_levels</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span>
+<span class="n">Initializing</span> <span class="ow">and</span> <span class="n">building</span> <span class="n">CORDA</span> <span class="n">model</span><span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">10</span> <span class="mi">00</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span><span class="mi">053</span> <span class="o">-</span> <span class="n">INFO</span> <span class="o">-</span> <span class="n">The</span> <span class="n">current</span> <span class="n">solver</span> <span class="n">interface</span> <span class="n">glpk</span> <span class="n">doesn</span><span class="s1">&#39;t support setting the optimality tolerance.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CORDA</span> <span class="n">model</span> <span class="n">optimization</span> <span class="n">completed</span><span class="o">.</span>
+<span class="n">Optimized</span> <span class="n">CORDA</span> <span class="n">model</span><span class="p">:</span>
+<span class="n">build</span> <span class="n">status</span><span class="p">:</span> <span class="n">reconstruction</span> <span class="n">complete</span>
+<span class="n">Inc</span><span class="o">.</span> <span class="n">reactions</span><span class="p">:</span> <span class="mi">1518</span><span class="o">/</span><span class="mi">10441</span>
+ <span class="o">-</span> <span class="n">unclear</span><span class="p">:</span> <span class="mi">221</span><span class="o">/</span><span class="mi">1523</span>
+ <span class="o">-</span> <span class="n">exclude</span><span class="p">:</span> <span class="mi">713</span><span class="o">/</span><span class="mi">6606</span>
+ <span class="o">-</span> <span class="n">low</span> <span class="ow">and</span> <span class="n">medium</span><span class="p">:</span> <span class="mi">385</span><span class="o">/</span><span class="mi">2107</span>
+ <span class="o">-</span> <span class="n">high</span><span class="p">:</span> <span class="mi">199</span><span class="o">/</span><span class="mi">205</span>
+
+<span class="n">Reconstruction</span> <span class="n">completed</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">parent</span> <span class="n">model</span> <span class="n">Recon3D</span>
+</pre></div>
+</div>
+<table>
+    <tr>
+        <td><strong>Name</strong></td>
+        <td>Recon3D</td>
+    </tr><tr>
+        <td><strong>Memory address</strong></td>
+        <td>32ddb6490</td>
+    </tr><tr>
+        <td><strong>Number of metabolites</strong></td>
+        <td>1200</td>
+    </tr><tr>
+        <td><strong>Number of reactions</strong></td>
+        <td>1518</td>
+    </tr><tr>
+        <td><strong>Number of genes</strong></td>
+        <td>684</td>
+    </tr><tr>
+        <td><strong>Number of groups</strong></td>
+        <td>0</td>
+    </tr><tr>
+        <td><strong>Objective expression</strong></td>
+        <td>1.0*BIOMASS_maintenance - 1.0*BIOMASS_maintenance_reverse_5b3f9</td>
+    </tr><tr>
+        <td><strong>Compartments</strong></td>
+        <td>cytosol, mitochondria, peroxisome/glyoxysome, extracellular space, lysosome, endoplasmic reticulum, nucleus</td>
+    </tr>
+  </table></section>
+<section id="save-the-csms-for-further-analysis-and-plots">
+<h2>Save the CSMs for further analysis and plots<a class="headerlink" href="#save-the-csms-for-further-analysis-and-plots" title="Link to this heading"></a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cobra</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_sbml_model</span><span class="p">(</span><span class="n">epithelial_csm</span><span class="p">,</span> <span class="s2">&quot;epithelial_csm.xml&quot;</span><span class="p">)</span>
+<span class="n">cobra</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write_sbml_model</span><span class="p">(</span><span class="n">mesenchymal_csm</span><span class="p">,</span> <span class="s2">&quot;mesenchymal_csm.xml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="analyse_csm.html" class="btn btn-neutral float-right" title="Analysis of Context Specific Metabolic Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Karthik Dani.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -10,6 +10,7 @@ Welcome to GSMM's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   tutorials
    modules
 
 Indices and tables

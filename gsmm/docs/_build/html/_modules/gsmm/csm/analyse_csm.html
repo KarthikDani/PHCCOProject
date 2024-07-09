@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gsmm.csm.analyse_csm &mdash; GSMM 0.1.2 documentation</title>
+  <title>gsmm.csm.analyse_csm &mdash; GSMM 0.1.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=92734c54"></script>
+        <script src="../../../_static/documentation_options.js?v=8618f531"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -43,6 +43,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">gsmm</a></li>
 </ul>
 
@@ -91,6 +92,20 @@
 <div class="viewcode-block" id="load_models">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.load_models">[docs]</a>
 <span class="k">def</span> <span class="nf">load_models</span><span class="p">(</span><span class="n">model_paths</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load SBML models from specified paths into COBRApy Model objects.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model_paths (Dict[str, str]): Dictionary where keys are model names and values are paths to SBML files.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict[str, Model]: Dictionary mapping model names to corresponding COBRApy Model objects.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function iterates through the provided dictionary of model paths, attempts to load each SBML model</span>
+<span class="sd">        using COBRApy&#39;s read_sbml_model function, and stores the loaded models in a dictionary. If any path is</span>
+<span class="sd">        invalid or model loading fails, an error message is printed and that model is skipped.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">model_paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loading model: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
@@ -113,6 +128,20 @@
 <div class="viewcode-block" id="optimize_and_get_fluxes">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.optimize_and_get_fluxes">[docs]</a>
 <span class="k">def</span> <span class="nf">optimize_and_get_fluxes</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Optimize the given COBRApy model and retrieve flux distributions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (Model): COBRApy Model object to be optimized.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict[str, float]: Dictionary mapping reaction IDs to their corresponding flux values.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function attempts to optimize the input model using COBRApy&#39;s default solver.</span>
+<span class="sd">        If successful, it returns a dictionary containing reaction IDs as keys and their respective flux values.</span>
+<span class="sd">        If optimization fails due to an OptimizationError or Infeasible solution, an empty dictionary is returned.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimizing model: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
         <span class="n">solution</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
@@ -129,6 +158,20 @@
 <div class="viewcode-block" id="extract_fluxes">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.extract_fluxes">[docs]</a>
 <span class="k">def</span> <span class="nf">extract_fluxes</span><span class="p">(</span><span class="n">models</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract fluxes for all reactions from a set of COBRApy models.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        models (Dict[str, Model]): Dictionary of model names mapped to COBRApy Model objects.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing extracted flux data with columns &#39;Reaction&#39;, &#39;Flux&#39;, and &#39;Model&#39;.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function iterates over each model in the input dictionary and optimizes it to obtain fluxes</span>
+<span class="sd">        for all reactions in the model. The extracted flux data is structured into a DataFrame, where each row</span>
+<span class="sd">        represents a reaction with its associated flux and model name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fluxes_data</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracting fluxes for model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
@@ -147,9 +190,27 @@
 <span class="c1"># Function to filter non-zero fluxes</span>
 <div class="viewcode-block" id="filter_non_zero_fluxes">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.filter_non_zero_fluxes">[docs]</a>
-<span class="k">def</span> <span class="nf">filter_non_zero_fluxes</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">filter_non_zero_fluxes</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter non-zero fluxes from a DataFrame based on a specified threshold.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): Input DataFrame containing flux data.</span>
+<span class="sd">        threshold (float, optional): Threshold value for flux. Default is 1.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Filtered DataFrame containing reactions with fluxes above or equal to the threshold.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the &#39;Flux&#39; column is not present in the input DataFrame.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function filters the input DataFrame to retain only rows where the &#39;Flux&#39; column</span>
+<span class="sd">        meets or exceeds the specified threshold. Missing flux values are filled with 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="s1">&#39;Flux&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;DataFrame must contain &#39;Flux&#39; column&quot;</span><span class="p">)</span>
+    
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Filtering fluxes with threshold: </span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Flux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Flux&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">]</span>
@@ -162,6 +223,23 @@
 <div class="viewcode-block" id="get_sink_fluxes">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.get_sink_fluxes">[docs]</a>
 <span class="k">def</span> <span class="nf">get_sink_fluxes</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">metabolites</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract sink reaction fluxes for specified metabolites from a given COBRApy model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (Model): COBRApy Model object from which sink fluxes will be extracted.</span>
+<span class="sd">        model_name (str): Name or identifier of the model for logging purposes.</span>
+<span class="sd">        metabolites (List[str]): List of metabolite IDs or names for which sink fluxes will be extracted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[Dict[str, Union[str, float]]]: List of dictionaries, each containing information about a sink reaction flux.</span>
+<span class="sd">            Each dictionary typically includes keys &#39;Metabolite&#39;, &#39;Flux&#39;, and &#39;Context_Model&#39;.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function iterates over each metabolite in the provided list of metabolites.</span>
+<span class="sd">        For each metabolite, it identifies sink reactions (reactions starting with &#39;SK&#39;)</span>
+<span class="sd">        and calculates their flux under optimal conditions using COBRApy&#39;s optimization.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sink_fluxes</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">met_id</span> <span class="ow">in</span> <span class="n">metabolites</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
@@ -191,6 +269,24 @@
 <div class="viewcode-block" id="collect_sink_fluxes">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.collect_sink_fluxes">[docs]</a>
 <span class="k">def</span> <span class="nf">collect_sink_fluxes</span><span class="p">(</span><span class="n">models</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">],</span> <span class="n">metabolites</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Collect sink fluxes for all context-specific models.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        models (Dict[str, Model]): Dictionary containing context-specific models.</span>
+<span class="sd">            Keys are model names and values are COBRApy Model objects.</span>
+<span class="sd">        metabolites (List[str]): List of metabolites of interest for sink flux collection.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing collected sink flux data.</span>
+<span class="sd">            Columns typically include &#39;model&#39;, &#39;metabolite&#39;, and &#39;flux&#39;.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function iterates over each model in the provided dictionary of models.</span>
+<span class="sd">        For each model, it collects sink fluxes for specified metabolites using the</span>
+<span class="sd">        get_sink_fluxes function. The collected sink flux data from all models is</span>
+<span class="sd">        concatenated into a single DataFrame and returned.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">all_sink_fluxes</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collecting sink fluxes for model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
@@ -205,6 +301,19 @@
 <div class="viewcode-block" id="save_data_for_visualization">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.save_data_for_visualization">[docs]</a>
 <span class="k">def</span> <span class="nf">save_data_for_visualization</span><span class="p">(</span><span class="n">df_fluxes</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">df_sink_fluxes</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;flux_data.pkl&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save flux and sink flux dataframes to pickle files for visualization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df_fluxes (pd.DataFrame): DataFrame containing flux data to be saved.</span>
+<span class="sd">        df_sink_fluxes (pd.DataFrame): DataFrame containing sink flux data to be saved.</span>
+<span class="sd">        filename (str, optional): Name of the pickle file to save. Default is &#39;flux_data.pkl&#39;.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function saves two DataFrames, df_fluxes and df_sink_fluxes, to pickle files.</span>
+<span class="sd">        df_fluxes is saved directly to the specified filename.</span>
+<span class="sd">        df_sink_fluxes is saved to a file with &#39;sink_flux&#39; substituted for &#39;flux&#39; in the filename.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving data to </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
         <span class="n">df_fluxes</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
@@ -222,7 +331,22 @@
 <div class="viewcode-block" id="perform_single_reaction_deletion">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.perform_single_reaction_deletion">[docs]</a>
 <span class="k">def</span> <span class="nf">perform_single_reaction_deletion</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform single reaction deletion on the given model.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform single reaction deletion analysis on a given COBRApy model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (Model): COBRApy Model object on which single reaction deletion will be performed.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing the results of single reaction deletion.</span>
+<span class="sd">            Index represents reaction IDs, and columns typically include &#39;growth&#39; or similar metrics.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function utilizes COBRApy&#39;s single_reaction_deletion method to analyze the impact</span>
+<span class="sd">        of deleting each individual reaction in the model on growth or another specified metric.</span>
+<span class="sd">        It returns a DataFrame where each row corresponds to a reaction and columns represent</span>
+<span class="sd">        the results of the deletion analysis.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">deletion_results</span> <span class="o">=</span> <span class="n">single_reaction_deletion</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">deletion_results</span></div>
 
@@ -231,7 +355,23 @@
 <div class="viewcode-block" id="save_reaction_deletion_results">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.save_reaction_deletion_results">[docs]</a>
 <span class="k">def</span> <span class="nf">save_reaction_deletion_results</span><span class="p">(</span><span class="n">models_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Model</span><span class="p">],</span> <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform single reaction deletion for each model in models_dict and save the results.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform single reaction deletion on each model in models_dict and save the deletion results.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        models_dict (Dict[str, Model]): Dictionary containing models to analyze.</span>
+<span class="sd">            Keys are model names and values are COBRApy Model objects.</span>
+<span class="sd">        output_dir (str): Directory path where the deletion results will be saved.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict[str, pd.DataFrame]: Dictionary containing deletion results for each model.</span>
+<span class="sd">            Keys are model names and values are DataFrames with deletion results.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function performs single reaction deletion for each model provided in models_dict.</span>
+<span class="sd">        It saves the deletion results as pickle files in the specified output_dir with filenames</span>
+<span class="sd">        formatted as &quot;{model_name}_reaction_deletion_results.pkl&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Performing single reaction deletion on </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
@@ -247,7 +387,20 @@
 <div class="viewcode-block" id="find_common_reactions">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.find_common_reactions">[docs]</a>
 <span class="k">def</span> <span class="nf">find_common_reactions</span><span class="p">(</span><span class="n">reaction_deletion_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find common reactions across all models.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find common reactions across all models based on their deletion results.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reaction_deletion_results (Dict[str, pd.DataFrame]): Dictionary containing deletion results for each model.</span>
+<span class="sd">            Keys are model names and values are DataFrames with deletion results.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List[str]: List of reaction IDs that are common across all models.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function identifies common reactions present in the deletion results of all models provided.</span>
+<span class="sd">        It computes the intersection of reaction sets from all model deletion results to find common reactions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">reaction_sets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">reaction_deletion_results</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
     <span class="n">common_reactions</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="o">*</span><span class="n">reaction_sets</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">common_reactions</span><span class="p">)</span></div>
@@ -257,7 +410,22 @@
 <div class="viewcode-block" id="filter_deletion_results">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.filter_deletion_results">[docs]</a>
 <span class="k">def</span> <span class="nf">filter_deletion_results</span><span class="p">(</span><span class="n">deletion_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span> <span class="n">common_reactions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter reaction deletion results to keep only common reactions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter deletion results to keep only common reactions across models.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        deletion_results (Dict[str, pd.DataFrame]): Dictionary containing deletion results for each model.</span>
+<span class="sd">            Keys are model names and values are DataFrames with deletion results.</span>
+<span class="sd">        common_reactions (List[str]): List of reaction IDs representing common reactions to retain.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dict[str, pd.DataFrame]: Filtered deletion results dictionary.</span>
+<span class="sd">            Keys remain the same as deletion_results, and values are DataFrames filtered to include only common reactions.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function filters deletion results for each model provided in deletion_results based on the list of common reactions.</span>
+<span class="sd">        Only reactions present in common_reactions are retained in each model&#39;s deletion results DataFrame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">filtered_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">deletion_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">filtered_results</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">common_reactions</span><span class="p">)]</span>
@@ -284,29 +452,26 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving filtered reaction deletion results: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="run_single_reaction_deletion">
-<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.run_single_reaction_deletion">[docs]</a>
-<span class="k">def</span> <span class="nf">run_single_reaction_deletion</span><span class="p">():</span>
+<span class="c1"># def run_single_reaction_deletion():</span>
 
-    <span class="c1"># Load models</span>
-    <span class="n">models</span> <span class="o">=</span> <span class="n">load_models</span><span class="p">(</span><span class="n">model_paths</span><span class="p">)</span>
+<span class="c1">#     # Load models</span>
+<span class="c1">#     models = load_models(model_paths)</span>
 
-    <span class="c1"># Perform and save reaction deletion results</span>
-    <span class="n">reaction_deletion_results</span> <span class="o">=</span> <span class="n">save_reaction_deletion_results</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+<span class="c1">#     # Perform and save reaction deletion results</span>
+<span class="c1">#     reaction_deletion_results = save_reaction_deletion_results(models, output_dir)</span>
 
-    <span class="c1"># Find common reactions</span>
-    <span class="n">common_reactions</span> <span class="o">=</span> <span class="n">find_common_reactions</span><span class="p">(</span><span class="n">reaction_deletion_results</span><span class="p">)</span>
+<span class="c1">#     # Find common reactions</span>
+<span class="c1">#     common_reactions = find_common_reactions(reaction_deletion_results)</span>
 
-    <span class="c1"># Filter deletion results to keep only common reactions</span>
-    <span class="n">filtered_reaction_deletion_results</span> <span class="o">=</span> <span class="n">filter_deletion_results</span><span class="p">(</span><span class="n">reaction_deletion_results</span><span class="p">,</span> <span class="n">common_reactions</span><span class="p">)</span>
+<span class="c1">#     # Filter deletion results to keep only common reactions</span>
+<span class="c1">#     filtered_reaction_deletion_results = filter_deletion_results(reaction_deletion_results, common_reactions)</span>
 
-    <span class="c1"># Save filtered reaction deletion results</span>
-    <span class="n">save_filtered_reaction_deletion_results</span><span class="p">(</span><span class="n">filtered_reaction_deletion_results</span><span class="p">,</span> <span class="n">output_dir__reaction_deletion_results</span><span class="p">)</span></div>
-
+<span class="c1">#     # Save filtered reaction deletion results</span>
+<span class="c1">#     save_filtered_reaction_deletion_results(filtered_reaction_deletion_results, output_dir__reaction_deletion_results)</span>
 
 <div class="viewcode-block" id="analyse_and_save_fluxes">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.analyse_csm.analyse_and_save_fluxes">[docs]</a>
-<span class="k">def</span> <span class="nf">analyse_and_save_fluxes</span><span class="p">(</span><span class="n">model_paths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">analyse_and_save_fluxes</span><span class="p">(</span><span class="n">model_paths</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Analyze fluxes from given model paths and save the results.</span>
 

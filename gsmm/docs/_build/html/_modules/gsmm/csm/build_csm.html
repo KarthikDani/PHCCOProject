@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gsmm.csm.build_csm &mdash; GSMM 0.1.2 documentation</title>
+  <title>gsmm.csm.build_csm &mdash; GSMM 0.1.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=92734c54"></script>
+        <script src="../../../_static/documentation_options.js?v=8618f531"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -43,6 +43,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">gsmm</a></li>
 </ul>
 
@@ -78,11 +79,58 @@
 <span class="kn">from</span> <span class="nn">corda</span> <span class="kn">import</span> <span class="n">CORDA</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">import</span> <span class="nn">cobra</span>
+<span class="kn">from</span> <span class="nn">.config</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="set_glpk_solver">
+<a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.set_glpk_solver">[docs]</a>
+<span class="k">def</span> <span class="nf">set_glpk_solver</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets the default solver in COBRApy to GLPK (GNU Linear Programming Kit).</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        RuntimeError: If setting the GLPK solver fails for any reason.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function updates the global solver configuration for COBRApy.</span>
+<span class="sd">        GLPK is chosen as it is an open-source linear programming solver suitable</span>
+<span class="sd">        for solving many types of optimization problems encountered in constraint-based</span>
+<span class="sd">        modeling of metabolic networks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Get the default solver configuration from COBRApy</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">cobra</span><span class="o">.</span><span class="n">Configuration</span><span class="p">()</span>
+
+        <span class="c1"># Set the solver to GLPK</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="s2">&quot;glpk&quot;</span>
+
+        <span class="c1"># Update the solver configuration in COBRApy</span>
+        <span class="n">cobra</span><span class="o">.</span><span class="n">Configuration</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">config</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cobra Configuration set to GLPK solver!&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to set GLPK solver: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="read_parent_model">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.read_parent_model">[docs]</a>
 <span class="k">def</span> <span class="nf">read_parent_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cobra</span><span class="o">.</span><span class="n">Model</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a COBRA model from SBML file.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads an SBML model from the specified path using COBRApy.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model_path (str): Path to the SBML model file path to reconstruct from. This is usully base model.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cobra.Model: The COBRApy model object loaded from the SBML file.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError: If the specified model file path does not exist.</span>
+<span class="sd">        IOError: If there is an error reading the SBML model file.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function uses COBRApy&#39;s `read_sbml_model` function to read an SBML model</span>
+<span class="sd">        file and return the corresponding COBRApy model object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loading SBML model from </span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">read_sbml_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SBML model loaded.&quot;</span><span class="p">)</span>
@@ -92,7 +140,24 @@
 <div class="viewcode-block" id="load_expression_data">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.load_expression_data">[docs]</a>
 <span class="k">def</span> <span class="nf">load_expression_data</span><span class="p">(</span><span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load expression data from CSV.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loads expression data from a CSV file into a pandas DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data_path (str): Path to the CSV file containing expression data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing the loaded expression data.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError: If the specified data file path does not exist.</span>
+<span class="sd">        IOError: If there is an error reading the CSV file.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function uses pandas&#39; `read_csv` function to read expression data from</span>
+<span class="sd">        a CSV file and returns it as a DataFrame. The CSV file should contain columns</span>
+<span class="sd">        representing Gene IDs and corresponding expression values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loading expression data from </span><span class="si">{</span><span class="n">data_path</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
     <span class="n">expression_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expression data loaded.&quot;</span><span class="p">)</span>
@@ -101,16 +166,33 @@
 
 <div class="viewcode-block" id="extract_genes">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.extract_genes">[docs]</a>
-<span class="k">def</span> <span class="nf">extract_genes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">name_column</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">id_column</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract genes from expression data based on specified columns.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">name_column</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracting genes from </span><span class="si">{</span><span class="n">name_column</span><span class="si">}</span><span class="s2"> column...&quot;</span><span class="p">)</span>
-        <span class="n">genes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">name_column</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="n">id_column</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">extract_genes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">id_column</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts gene IDs or names from a pandas DataFrame column.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): DataFrame containing gene data.</span>
+<span class="sd">        id_column (Union[str, None]): Name of the column containing gene IDs or names.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: List of gene IDs or names extracted from the specified column.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If `id_column` is not provided or does not exist in the DataFrame.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function extracts gene IDs or names from a specified column in the provided</span>
+<span class="sd">        DataFrame. It drops missing values (NaNs) and returns a list of extracted gene IDs</span>
+<span class="sd">        or names.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># if name_column:</span>
+    <span class="c1">#     print(f&quot;Extracting genes from {name_column} column...&quot;)</span>
+    <span class="c1">#     genes = data[name_column].dropna().tolist()</span>
+    <span class="k">if</span> <span class="n">id_column</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extracting genes from </span><span class="si">{</span><span class="n">id_column</span><span class="si">}</span><span class="s2"> column...&quot;</span><span class="p">)</span>
         <span class="n">genes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">id_column</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Either name_column or id_column must be provided.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;gene_id_column from the expression data must be provided.&quot;</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of Genes extracted: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">genes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">genes</span></div>
@@ -120,14 +202,26 @@
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.filter_model_by_genes">[docs]</a>
 <span class="k">def</span> <span class="nf">filter_model_by_genes</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">cobra</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">genes</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cobra</span><span class="o">.</span><span class="n">Model</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Filter a COBRA model to include only reactions associated with specified genes.</span>
+<span class="sd">    Filters a COBRApy model by removing genes not present in a specified list.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (cobra.Model): The COBRApy model to be filtered.</span>
+<span class="sd">        genes (list): List of gene IDs or names to retain in the model.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cobra.Model: Filtered COBRApy model containing only the specified genes.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function creates a copy of the input model and removes genes that are not</span>
+<span class="sd">        present in the provided list from the copied model. It also prunes unused reactions</span>
+<span class="sd">        and metabolites to ensure consistency after gene removal.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Filtering model by genes...&quot;</span><span class="p">)</span>
     <span class="n">new_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">genes_in_model</span> <span class="o">=</span> <span class="p">{</span><span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="k">else</span> <span class="n">gene</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">new_model</span><span class="o">.</span><span class="n">genes</span><span class="p">}</span>  <span class="c1"># Handles both ID and name</span>
+    <span class="n">genes_in_model</span> <span class="o">=</span> <span class="p">{</span><span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">new_model</span><span class="o">.</span><span class="n">genes</span><span class="p">}</span> 
     <span class="n">genes_to_remove</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">genes_in_model</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">genes</span><span class="p">))</span>
     
-    <span class="n">genes_to_remove_by_id</span> <span class="o">=</span> <span class="p">{</span><span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">new_model</span><span class="o">.</span><span class="n">genes</span> <span class="k">if</span> <span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="n">genes_to_remove</span> <span class="ow">or</span> <span class="n">gene</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">genes_to_remove</span><span class="p">}</span>
+    <span class="n">genes_to_remove_by_id</span> <span class="o">=</span> <span class="p">{</span><span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">new_model</span><span class="o">.</span><span class="n">genes</span> <span class="k">if</span> <span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="n">genes_to_remove</span><span class="p">}</span>
     
     <span class="n">remove_genes</span><span class="p">(</span><span class="n">new_model</span><span class="p">,</span> <span class="n">genes_to_remove_by_id</span><span class="p">,</span> <span class="n">remove_reactions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">new_model</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">prune_unused_reactions</span><span class="p">(</span><span class="n">new_model</span><span class="p">)</span>
@@ -141,39 +235,79 @@
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.normalize_expression_data">[docs]</a>
 <span class="k">def</span> <span class="nf">normalize_expression_data</span><span class="p">(</span><span class="n">expression_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">scores_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Normalize expression data and calculate confidence levels.</span>
+<span class="sd">    Normalizes expression data and assigns confidence levels based on quantiles.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        expression_data (pd.DataFrame): DataFrame containing expression data.</span>
+<span class="sd">        scores_column (str): Name of the column to normalize and use for confidence levels.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with normalized scores and assigned confidence levels.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function uses MinMaxScaler from scikit-learn to normalize values in the specified</span>
+<span class="sd">        column of the input DataFrame. It calculates confidence levels based on quantiles of</span>
+<span class="sd">        the normalized scores.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normalizing expression data...&quot;</span><span class="p">)</span>
     <span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
     <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">expression_data</span><span class="p">[[</span><span class="n">scores_column</span><span class="p">]])</span>
     
-    <span class="n">expression_data</span><span class="p">[</span><span class="s1">&#39;Gene_Confidence_Level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="p">(</span>
-        <span class="mi">3</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.90</span><span class="p">)</span> <span class="k">else</span>
-        <span class="mi">2</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="k">else</span>
-        <span class="mi">1</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.50</span><span class="p">)</span> <span class="k">else</span>
-        <span class="mi">0</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="k">else</span>
-        <span class="o">-</span><span class="mi">1</span>
-    <span class="p">))</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expression data normalized and confidence levels assigned.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expression data has been normalized.&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">expression_data</span></div>
 
 
 <div class="viewcode-block" id="assign_reaction_confidences">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.assign_reaction_confidences">[docs]</a>
-<span class="k">def</span> <span class="nf">assign_reaction_confidences</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">cobra</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">expression_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">gene_id_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scores_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">assign_reaction_confidences</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">cobra</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> 
+                                <span class="n">expression_data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> 
+                                <span class="n">gene_id_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                                <span class="n">scores_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Assign confidence levels to reactions based on associated genes.</span>
+<span class="sd">    Assigns confidence levels to reactions based on associated genes&#39; expression data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (cobra.Model): The metabolic model to assign reaction confidence levels to.</span>
+<span class="sd">        expression_data (pd.DataFrame): DataFrame containing expression data and gene confidence levels.</span>
+<span class="sd">        gene_id_column (str): Column name in `expression_data` containing gene IDs or names.</span>
+<span class="sd">        scores_column (str): Name of the column in `expression_data` used for gene expression values.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with assigned confidence levels for reactions.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function assigns confidence levels (ranging from 0 to 3) to reactions in the provided metabolic model </span>
+<span class="sd">        based on the associated genes&#39; expression levels in `expression_data`. Specific biomass reactions are assigned</span>
+<span class="sd">        the highest confidence level (3) by default.</span>
+
+<span class="sd">        The number of different confidence levels assigned depends on the quartiles of `scores_column` in </span>
+<span class="sd">        `expression_data`, distributed as follows:</span>
+<span class="sd">        - (-1): Less than 25th percentile</span>
+<span class="sd">        - 0: 25th to 49.99th percentile</span>
+<span class="sd">        - 1: 50th to 74.99th percentile</span>
+<span class="sd">        - 2: 75th to 89.99th percentile</span>
+<span class="sd">        - 3: &gt;= 90th percentile</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        If `scores_column` represents gene expression levels, the function assigns the confidence levels based on</span>
+<span class="sd">        quartiles of these expression values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Assigning confidence levels to reactions...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Assigning confidence levels to reactions giving highest confidence levels to Biomass reactions...&quot;</span><span class="p">)</span>
+    
+    <span class="n">expression_data</span><span class="p">[</span><span class="s1">&#39;Gene_Confidence_Level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="p">(</span>
+    <span class="mi">3</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.90</span><span class="p">)</span> <span class="k">else</span>
+    <span class="mi">2</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span> <span class="k">else</span>
+    <span class="mi">1</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.50</span><span class="p">)</span> <span class="k">else</span>
+    <span class="mi">0</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">expression_data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Normalized_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span> <span class="k">else</span>
+    <span class="o">-</span><span class="mi">1</span>
+    <span class="p">))</span>
+    
     <span class="n">reaction_confidence</span> <span class="o">=</span> <span class="p">{}</span>
     
     <span class="k">for</span> <span class="n">reaction</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">reactions</span><span class="p">:</span>
-        <span class="n">reaction_id</span> <span class="o">=</span> <span class="n">reaction</span><span class="o">.</span><span class="n">id</span>
-        <span class="n">associated_genes</span> <span class="o">=</span> <span class="p">{</span><span class="n">gene</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="n">gene</span><span class="o">.</span><span class="n">name</span> <span class="k">else</span> <span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">reaction</span><span class="o">.</span><span class="n">genes</span><span class="p">}</span>
+        <span class="n">associated_genes</span> <span class="o">=</span> <span class="p">{</span><span class="n">gene</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">reaction</span><span class="o">.</span><span class="n">genes</span><span class="p">}</span>
         <span class="n">gene_confidences</span> <span class="o">=</span> <span class="n">expression_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">expression_data</span><span class="p">[</span><span class="n">gene_id_column</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">associated_genes</span><span class="p">),</span> <span class="s1">&#39;Gene_Confidence_Level&#39;</span><span class="p">]</span>
-        
-        <span class="n">reaction_confidence</span><span class="p">[</span><span class="n">reaction_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">gene_confidences</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">gene_confidences</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">reaction_confidence</span><span class="p">[</span><span class="n">reaction</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">gene_confidences</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">gene_confidences</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
     
     <span class="c1"># Assign highest confidence level to specific biomass reactions</span>
     <span class="k">for</span> <span class="n">biomass_reaction_id</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;BIOMASS_maintenance_noTrTr&#39;</span><span class="p">,</span> <span class="s1">&#39;BIOMASS_maintenance&#39;</span><span class="p">,</span> <span class="s1">&#39;BIOMASS_reaction&#39;</span><span class="p">]:</span>
@@ -181,7 +315,12 @@
             <span class="n">reaction_confidence</span><span class="p">[</span><span class="n">biomass_reaction_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
     
     <span class="n">reaction_confidence_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">reaction_confidence</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Reaction_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Confidence_Level&#39;</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reaction Confidences: &quot;</span><span class="p">,</span> <span class="n">reaction_confidence_df</span><span class="p">)</span>
+    
+    <span class="c1"># Get count of each confidence level after assignment</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">reaction_confidence_df</span><span class="p">[</span><span class="s1">&#39;Confidence_Level&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of reactions with confidence level </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
     <span class="n">reaction_confidence_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;reaction_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s2">_confidence_levels.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reaction confidence levels saved as reaction_</span><span class="si">{</span><span class="n">scores_column</span><span class="si">}</span><span class="s2">_confidence_levels.csv.&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">reaction_confidence_df</span></div>
@@ -191,9 +330,21 @@
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.optimize_model">[docs]</a>
 <span class="k">def</span> <span class="nf">optimize_model</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">cobra</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">reaction_confidence_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CORDA</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Initialize and build CORDA model optimization.</span>
+<span class="sd">    Initializes and optimizes a COBRApy model using CORDA with reaction confidence levels.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (cobra.Model): The COBRApy model to be optimized.</span>
+<span class="sd">        reaction_confidence_dict (dict): Dictionary mapping reaction IDs to confidence levels.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        CORDA: Optimized CORDA object containing the optimized model and solution.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function initializes a CORDA optimization object using the provided COBRApy model</span>
+<span class="sd">        and reaction confidence levels. CORDA (Cost Optimisation Reaction Dependency Assessment)</span>
+<span class="sd">        optimizes metabolic models based on context-specific data and reactions&#39; confidence levels.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initializing and building CORDA model...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Building CORDA model, Please be patient as this will take some time...&quot;</span><span class="p">)</span>
     <span class="n">opt</span> <span class="o">=</span> <span class="n">CORDA</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">reaction_confidence_dict</span><span class="p">)</span>
     <span class="n">opt</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CORDA model optimization completed.&quot;</span><span class="p">)</span>
@@ -202,26 +353,45 @@
 
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.main">[docs]</a>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gene_name_column</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">gene_id_column</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">scores_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gene_id_column</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">scores_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base_model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Main function to execute the workflow.</span>
+<span class="sd">    Executes a pipeline to load, filter, normalize data, assign reaction confidences, optimize a metabolic model using CORDA.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model_path (str): Path to the SBML model file (Using big model like Recon3D).</span>
+<span class="sd">        data_path (str): Path to the CSV file containing expression data.</span>
+<span class="sd">        gene_id_column (Union[str, None]): Column name in `expression_data` containing gene IDs or names.</span>
+<span class="sd">        scores_column (str): Name of the column in `expression_data` used for gene confidence levels.</span>
+<span class="sd">        base_model_path (str): Path to save the filtered SBML model.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cobra.Model: Optimized COBRApy model (Context Specific Model) object after CORDA optimization.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function orchestrates the entire process of setting up the solver, loading the SBML model,</span>
+<span class="sd">        loading expression data, extracting genes, filtering the model based on genes, normalizing expression</span>
+<span class="sd">        data, assigning reaction confidence levels based on gene expression, optimizing the model using CORDA,</span>
+<span class="sd">        and saving the optimized model to a new SBML file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">set_glpk_solver</span><span class="p">()</span>
+    
     <span class="c1"># Load SBML model and expression data</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">read_parent_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
     <span class="n">expression_data</span> <span class="o">=</span> <span class="n">load_expression_data</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
     
     <span class="c1"># Extract genes from expression data</span>
-    <span class="n">genes</span> <span class="o">=</span> <span class="n">extract_genes</span><span class="p">(</span><span class="n">expression_data</span><span class="p">,</span> <span class="n">gene_name_column</span><span class="p">,</span> <span class="n">gene_id_column</span><span class="p">)</span>
+    <span class="n">genes</span> <span class="o">=</span> <span class="n">extract_genes</span><span class="p">(</span><span class="n">expression_data</span><span class="p">,</span> <span class="n">gene_id_column</span><span class="p">)</span>
     
     <span class="c1"># Filter model by genes</span>
     <span class="n">filtered_model</span> <span class="o">=</span> <span class="n">filter_model_by_genes</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">genes</span><span class="p">)</span>
-    <span class="n">write_sbml_model</span><span class="p">(</span><span class="n">filtered_model</span><span class="p">,</span> <span class="s2">&quot;emt_base.xml&quot;</span><span class="p">)</span>
+    <span class="n">write_sbml_model</span><span class="p">(</span><span class="n">filtered_model</span><span class="p">,</span> <span class="n">base_model_path</span><span class="p">)</span>
     
     <span class="c1"># Normalize expression data and assign confidence levels</span>
     <span class="n">normalized_expression</span> <span class="o">=</span> <span class="n">normalize_expression_data</span><span class="p">(</span><span class="n">expression_data</span><span class="p">,</span> <span class="n">scores_column</span><span class="p">)</span>
     
     <span class="c1"># Assign reaction confidence levels</span>
-    <span class="n">reaction_confidence_df</span> <span class="o">=</span> <span class="n">assign_reaction_confidences</span><span class="p">(</span><span class="n">filtered_model</span><span class="p">,</span> <span class="n">normalized_expression</span><span class="p">,</span> <span class="n">gene_id_column</span><span class="p">,</span> <span class="n">scores_column</span><span class="p">)</span>
+    <span class="n">reaction_confidence_df</span> <span class="o">=</span> <span class="n">assign_reaction_confidences</span><span class="p">(</span><span class="n">filtered_model</span><span class="p">,</span> <span class="n">normalized_expression</span><span class="p">,</span> <span class="n">gene_id_column</span><span class="p">,</span> 
+                                                         <span class="n">scores_column</span><span class="p">)</span>
     
     <span class="c1"># Convert reaction confidence DataFrame to dictionary</span>
     <span class="n">reaction_confidence_dict</span> <span class="o">=</span> <span class="n">reaction_confidence_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Reaction_ID&#39;</span><span class="p">)[</span><span class="s1">&#39;Confidence_Level&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
@@ -238,26 +408,32 @@
 
 <div class="viewcode-block" id="run_model_reconstruction">
 <a class="viewcode-back" href="../../../gsmm.csm.html#gsmm.csm.build_csm.run_model_reconstruction">[docs]</a>
-<span class="k">def</span> <span class="nf">run_model_reconstruction</span><span class="p">(</span><span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+<span class="k">def</span> <span class="nf">run_model_reconstruction</span><span class="p">(</span><span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                             <span class="n">base_model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                              <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                             <span class="n">gene_name_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
                              <span class="n">gene_id_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                             <span class="n">scores_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+                             <span class="n">scores_column</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">cobra</span><span class="o">.</span><span class="n">Model</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Run model reconstruction using the specified paths and columns.</span>
+<span class="sd">    Runs the pipeline for reconstructing an optimized metabolic model from expression data.</span>
 
-<span class="sd">    Parameters:</span>
-<span class="sd">    - model_path (str): Path to the XML model file.</span>
-<span class="sd">    - data_path (str): Path to the input data CSV file.</span>
-<span class="sd">    - gene_name_column (str or None): Column name for gene names (optional).</span>
-<span class="sd">    - gene_id_column (str): Column name for gene IDs.</span>
-<span class="sd">    - scores_column (str): Column name for scores.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        model_path (str): Path to the Parent SBML model file from which Base model will be derived.</span>
+<span class="sd">        base_model_path (str): Path to save the filtered SBML Base model which will be used for Reconstruction of Context Specific Models.</span>
+<span class="sd">        data_path (str): Path to the CSV file containing expression data.</span>
+<span class="sd">        gene_id_column (Optional[str], optional): Column name in the expression data containing gene IDs or names.</span>
+<span class="sd">        scores_column (str): Name of the column in the expression data used for gene confidence levels.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    - str or None: Optimized model name if reconstruction is successful, else None.</span>
+<span class="sd">        Optional[cobra.Model]: Optimized COBRApy model object after reconstruction, or None if an error occurs.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        This function serves as an interface to run the main pipeline (`main` function) for reconstructing</span>
+<span class="sd">        an optimized metabolic model from the provided expression data. It handles exceptions and prints</span>
+<span class="sd">        error messages if reconstruction fails, returning None in case of errors.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">optimized_model</span> <span class="o">=</span> <span class="n">main</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">gene_name_column</span><span class="p">,</span> <span class="n">gene_id_column</span><span class="p">,</span> <span class="n">scores_column</span><span class="p">)</span>
+        <span class="n">optimized_model</span> <span class="o">=</span> <span class="n">main</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">gene_id_column</span><span class="p">,</span> <span class="n">scores_column</span><span class="p">,</span> <span class="n">base_model_path</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reconstruction completed from the parent model </span><span class="si">{</span><span class="n">optimized_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">optimized_model</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>

@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.1.4'
+VERSION = '0.1.9'
 DESCRIPTION = "Genome Scale Metabolic Modeling - [Currently] Pipeline for building and analyzing context-specific metabolic models"
 
 with open("README.md", "r") as f:

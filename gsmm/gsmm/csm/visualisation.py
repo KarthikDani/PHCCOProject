@@ -11,6 +11,20 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 def load_data(filepath: str) -> Optional[pd.DataFrame]:
+    """
+    Load data from a pickle file into a pandas DataFrame.
+
+    Args:
+        filepath (str): Path to the pickle file containing the data.
+
+    Returns:
+        Optional[pd.DataFrame]: Loaded pandas DataFrame if successful, otherwise None.
+
+    Notes:
+        This function attempts to load a pandas DataFrame from the specified pickle file. If the file is not found,
+        a FileNotFoundError is caught and logged, returning None. Any other loading errors are also caught, logged,
+        and None is returned.
+    """
     try:
         df = pd.read_pickle(filepath)
         logging.info(f"Loaded data from {filepath}")
@@ -22,13 +36,17 @@ def load_data(filepath: str) -> Optional[pd.DataFrame]:
         logging.error(f"Error loading data from {filepath}: {e}")
         return None
 
-def plot_flux_distribution_clustermap(df_fluxes, save_path):
+def plot_flux_distribution_clustermap(df_fluxes: pd.DataFrame, save_path: str, show_plot: bool = False) -> None:
     """
     Generate a clustermap for flux distribution across different models and reactions.
 
     Parameters:
     - df_fluxes (pd.DataFrame): DataFrame with 'Model', 'Reaction', and 'Flux' columns.
     - save_path (str): Path to save the clustermap.
+    - show_plot (bool): Whether the plot should be plotted along (Default: False)
+    
+    Returns:
+        None
     """
     try:
         logging.info("Generating flux distribution clustermap...")
@@ -56,19 +74,25 @@ def plot_flux_distribution_clustermap(df_fluxes, save_path):
         # Save the plot
         plt.savefig(save_path)
         logging.info(f"Flux distribution clustermap saved as {save_path}")
-        # plt.show()
+        
+        if show_plot:
+            plt.show()
 
     except Exception as e:
         logging.error(f"Error generating flux distribution clustermap: {str(e)}")
 
 
-def plot_sink_fluxes_heatmap(df: pd.DataFrame, output_file: str) -> None:
+def plot_sink_fluxes_heatmap(df: pd.DataFrame, output_file: str, show_plot: bool = False) -> None:
     """
     Plot a heatmap for sink fluxes across different context models.
 
     Parameters:
     - df (pd.DataFrame): DataFrame containing sink flux data with columns 'Metabolite', 'Flux', 'Context_Model'.
     - output_file (str): Path to save the sink fluxes heatmap.
+    - show_plot (bool): Whether the plot should be plotted along (Default: False)
+    
+    Returns:
+        None
     """
     if df is None or df.empty:
         logging.warning("Data frame is empty or None. Skipping heatmap generation.")
@@ -84,16 +108,24 @@ def plot_sink_fluxes_heatmap(df: pd.DataFrame, output_file: str) -> None:
         plt.savefig(output_file)
         plt.close()
         logging.info(f"Sink fluxes heatmap saved as {output_file}")
+        
+        if show_plot:
+            plt.show()
+            
     except Exception as e:
         logging.error(f"Error generating sink fluxes heatmap: {e}")
 
-def plot_flux_correlation_heatmap(df_fluxes, save_path):
+def plot_flux_correlation_heatmap(df_fluxes: pd.DataFrame, save_path: str, show_plot: bool = False) -> None:
     """
     Generate a heatmap of correlation coefficients for fluxes between different models for all reactions.
 
     Parameters:
     - df_fluxes (pd.DataFrame): DataFrame with 'Model', 'Reaction', and 'Flux' columns.
     - save_path (str): Path to save the heatmap.
+    - show_plot (bool): Whether the plot should be plotted along (Default: False)
+    
+    Returns:
+        None
     """
     try:
         logging.info("Generating flux correlation heatmap...")
@@ -119,18 +151,24 @@ def plot_flux_correlation_heatmap(df_fluxes, save_path):
         # Save the plot
         plt.savefig(save_path)
         logging.info(f"Flux correlation heatmap saved as {save_path}")
-        # plt.show()
+
+        if show_plot:
+            plt.show()
 
     except Exception as e:
         logging.error(f"Error generating flux correlation heatmap: {str(e)}")
 
-def plot_sink_flux_correlation_heatmap(df_sink_fluxes, save_path):
+def plot_sink_flux_correlation_heatmap(df_sink_fluxes: pd.DataFrame, save_path: str, show_plot: bool = False) -> None:
     """
     Generate a heatmap of correlation coefficients for sink fluxes between different models.
 
     Parameters:
     - df_sink_fluxes (pd.DataFrame): DataFrame with 'Metabolite', 'Flux', 'Context_Model' columns.
     - save_path (str): Path to save the heatmap.
+    - show_plot (bool): Whether the plot should be plotted along (Default: False)
+    
+    Returns:
+        None
     """
     try:
         logging.info("Generating sink flux correlation heatmap...")
@@ -156,14 +194,30 @@ def plot_sink_flux_correlation_heatmap(df_sink_fluxes, save_path):
         # Save the plot
         plt.savefig(save_path)
         logging.info(f"Sink flux correlation heatmap saved as {save_path}")
-        # plt.show()
-
+        
+        if show_plot:
+            plt.show()
+            
     except Exception as e:
         logging.error(f"Error generating sink flux correlation heatmap: {str(e)}")
         
-def filter_and_save_results(filtered_results, file_path):
-    """Filter and save valid DataFrames to a pickle file."""
+def filter_and_save_results(filtered_results: dict, file_path: str) -> None:
+    """
+    Filter and save valid DataFrames from a dictionary to a pickle file.
 
+    Args:
+        filtered_results (dict): Dictionary containing results to filter and save. Each value should be a pandas
+                                 DataFrame with columns 'ids', 'growth', and 'status'.
+        file_path (str): Path to the pickle file where filtered results will be saved.
+
+    Returns:
+        None
+
+    Notes:
+        This function iterates through the provided dictionary of results. It filters out DataFrames that do not
+        contain the required columns ('ids', 'growth', 'status') and saves the valid DataFrames to a pickle file.
+        If a DataFrame does not meet the criteria, a warning is logged and it is skipped.
+    """
     filtered_results_clean = {}
     for key, df in filtered_results.items():
         if isinstance(df, pd.DataFrame) and set(['ids', 'growth', 'status']).issubset(df.columns):
@@ -176,14 +230,16 @@ def filter_and_save_results(filtered_results, file_path):
 
 
 def plot_fluxes(flux_filepath: Optional[str] = flux_filepath,
-                sink_flux_filepath: Optional[str] = sink_flux_filepath):
+                sink_flux_filepath: Optional[str] = sink_flux_filepath,
+                show_plot: bool = False) -> None:
     """
     Plot flux distributions and sink fluxes using default or provided file paths.
 
     Parameters:
     - flux_filepath (str, optional): File path to flux data (default: 'flux_data.pkl').
     - sink_flux_filepath (str, optional): File path to sink flux data (default: 'sink_flux_data.pkl').
-
+    - show_plot (bool): Whether the plot should be plotted along (Default: False)
+    
     Returns:
     - None
     """
@@ -191,9 +247,9 @@ def plot_fluxes(flux_filepath: Optional[str] = flux_filepath,
     df_sink_fluxes = load_data(sink_flux_filepath)
 
     if df_flux is not None:
-        plot_flux_distribution_clustermap(df_flux, 'flux_distribution_clustermap.png')
-        plot_flux_correlation_heatmap(df_flux, 'flux_correlation_heatmap.png')
+        plot_flux_distribution_clustermap(df_flux, 'flux_distribution_clustermap.png', show_plot)
+        plot_flux_correlation_heatmap(df_flux, 'flux_correlation_heatmap.png', show_plot)
 
     if df_sink_fluxes is not None:
-        plot_sink_fluxes_heatmap(df_sink_fluxes, 'sink_fluxes_heatmap.png')
-        plot_sink_flux_correlation_heatmap(df_sink_fluxes, 'sink_flux_correlation_heatmap.png')
+        plot_sink_fluxes_heatmap(df_sink_fluxes, 'sink_fluxes_heatmap.png', show_plot)
+        plot_sink_flux_correlation_heatmap(df_sink_fluxes, 'sink_flux_correlation_heatmap.png', show_plot)
