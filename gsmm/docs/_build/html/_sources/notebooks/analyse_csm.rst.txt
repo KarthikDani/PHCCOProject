@@ -1,6 +1,9 @@
 Analysis of Context Specific Metabolic Models
 =============================================
 
+This notebook can be downloaded from `this
+link <https://github.com/KarthikDani/PHCCOProject/blob/main/gsmm/tutorials/analyse_csm.ipynb>`__
+
 Define ``model_names`` with their associated paths in a ``dict``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -1,6 +1,9 @@
 Building Context Specific Metabolic Models
 ==========================================
 
+This notebook can be downloaded from `this
+link <https://github.com/KarthikDani/PHCCOProject/blob/main/gsmm/tutorials/build_csm.ipynb>`__
+
 -  ``run_model_reconstruction`` from ``gsmm.csm.build_csm``: Used for
    running the model reconstruction pipeline.
 -  ``cobra``: A package for constraint-based reconstruction and
